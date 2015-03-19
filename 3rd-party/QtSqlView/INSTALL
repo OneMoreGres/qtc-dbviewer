@@ -1,0 +1,16 @@
+
+You need Qt version 4.1 or higher (tested only with 4.1.4) to compile
+QtSqlView. The program highly relies on the QtSql plugins selected with the
+Qt-configure program. Query your distribution's documentation on how to install
+the required SQL plugins.
+
+After unpacking the source tarball, run
+
+qmake && make
+
+to generate makefiles and compile the binary. The binary can then be run with
+
+./src/QtSqlView
+
+The binary has no support files other than Qt's shared libraries. It can be
+copied to whatever place seems fit.

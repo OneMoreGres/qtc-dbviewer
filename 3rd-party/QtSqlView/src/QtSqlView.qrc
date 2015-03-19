@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>img/addrow.png</file>
+        <file>img/conn.png</file>
+        <file>img/copyedit.png</file>
+        <file>img/database.png</file>
+        <file>img/delconn.png</file>
+        <file>img/delrow.png</file>
+        <file>img/diropen.png</file>
+        <file>img/edit.png</file>
+        <file>img/error.png</file>
+        <file>img/fileload.png</file>
+        <file>img/filesave.png</file>
+        <file>img/go.png</file>
+        <file>img/help.png</file>
+        <file>img/newconn.png</file>
+        <file>img/query.png</file>
+        <file>img/refresh.png</file>
+        <file>img/scheme.png</file>
+        <file>img/table.png</file>
+        <file>img/tablesys.png</file>
+        <file>img/trash.png</file>
+        <file>img/view.png</file>
+        <file>img/world.png</file>
+    </qresource>
+</RCC>
