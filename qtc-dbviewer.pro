@@ -6,6 +6,8 @@ include(paths.pri)
 
 # QtcDbViewer files
 
+include (3rd-party/QtSqlView/src/src.pri)
+
 SOURCES += \
     src/QtcDbViewerPlugin.cpp
 

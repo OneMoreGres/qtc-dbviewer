@@ -1,5 +1,6 @@
 #include "QtcDbViewerPlugin.h"
 #include "Constants.h"
+#include "WMain.h"
 
 #include <QCoreApplication>
 #include <QTranslator>
@@ -33,6 +34,11 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
   Q_UNUSED (errorString)
 
   initLanguage ();
+
+  Core::IMode *dbViewMode = new Core::IMode;
+  dbViewMode->setDisplayName (QStringLiteral ("Db Viewer"));
+  dbViewMode->setWidget (new WMain);
+  addAutoReleasedObject (dbViewMode);
 
   return true;
 }
