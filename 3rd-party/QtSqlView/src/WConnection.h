@@ -7,8 +7,8 @@
 #ifndef _WConnection_H_
 #define _WConnection_H_
 
-#include <QtGui/QDialog>
-#include <QtGui/QFileDialog>
+#include <QDialog>
+#include <QFileDialog>
 #include <QtSql/QSqlDatabase>
 
 #include "ui_WConnection.h"
@@ -21,20 +21,20 @@ class WConnection : public QDialog, private Ui::WConnection
 
     QString getDescription(QString drv)
     {
-	if (0) return "";
-	else if (drv == "QDB2")		return "IBM DB2";
-	else if (drv == "QIBASE")	return "Borland InterBase";
-	else if (drv == "QOCI")		return "Oracle Call Interface";
-	else if (drv == "QODBC")	return "ODBC";
-	else if (drv == "QODBC3")	return "ODBC";
-	else if (drv == "QTDS")		return "Sybase Adaptive Server";
+  if (0) return QStringLiteral("");
+  else if (drv == QStringLiteral("QDB2"))		return QStringLiteral("IBM DB2");
+  else if (drv == QStringLiteral("QIBASE"))	return QStringLiteral("Borland InterBase");
+  else if (drv == QStringLiteral("QOCI"))		return QStringLiteral("Oracle Call Interface");
+  else if (drv == QStringLiteral("QODBC"))	return QStringLiteral("ODBC");
+  else if (drv == QStringLiteral("QODBC3"))	return QStringLiteral("ODBC");
+  else if (drv == QStringLiteral("QTDS"))		return QStringLiteral("Sybase Adaptive Server");
 
-	else if (drv == "QMYSQL")	return "MySQL 4.x";
-	else if (drv == "QMYSQL3")	return "MySQL 3.x";
-	else if (drv == "QPSQL")	return "PostgreSQL 8.x";
-	else if (drv == "QPSQL7")	return "PostgreSQL 7.x";
-	else if (drv == "QSQLITE")	return "SQLite 3.x";
-	else if (drv == "QSQLITE2")	return "SQLite 2.x";
+  else if (drv == QStringLiteral("QMYSQL"))	return QStringLiteral("MySQL 4.x");
+  else if (drv == QStringLiteral("QMYSQL3"))	return QStringLiteral("MySQL 3.x");
+  else if (drv == QStringLiteral("QPSQL"))	return QStringLiteral("PostgreSQL 8.x");
+  else if (drv == QStringLiteral("QPSQL7"))	return QStringLiteral("PostgreSQL 7.x");
+  else if (drv == QStringLiteral("QSQLITE"))	return QStringLiteral("SQLite 3.x");
+  else if (drv == QStringLiteral("QSQLITE2"))	return QStringLiteral("SQLite 2.x");
 	else return QString::null;
     }
 
@@ -50,7 +50,7 @@ public:
 	    if (desc.isNull())
 		comboType->addItem(drv, drv);
 	    else
-		comboType->addItem(QString("%1 (%2)").arg(desc).arg(drv),
+    comboType->addItem(QString(QStringLiteral("%1 (%2)")).arg(desc).arg(drv),
 				   drv);
 	}
 
@@ -97,34 +97,34 @@ public:
     {
 	const QString &drv = dbp.driver;
 
-	if (drv == "QSQLITE" || drv == "QSQLITE2")
+  if (drv == QStringLiteral("QSQLITE") || drv == QStringLiteral("QSQLITE2"))
 	{
 	    editHostname->setEnabled(false);
 	    spinPort->setEnabled(false);
 	    editUsername->setEnabled(false);
 	    editPassword->setEnabled(false);
 	    checkAskPassword->setEnabled(false);
-	    labelDatabase->setText("Filename");
+      labelDatabase->setText(QStringLiteral("Filename"));
 	    buttonSelectFile->setEnabled(true);
 	}
-	else if (drv == "QMYSQL" || drv == "QMYSQL3")
+  else if (drv == QStringLiteral("QMYSQL") || drv == QStringLiteral("QMYSQL3"))
 	{
 	    editHostname->setEnabled(true);
 	    spinPort->setEnabled(true);
 	    editUsername->setEnabled(true);
 	    checkAskPassword->setEnabled(true);
 	    updatePasswordStatus();
-	    labelDatabase->setText("Database");
+      labelDatabase->setText(QStringLiteral("Database"));
 	    buttonSelectFile->setEnabled(false);
 	}
-	else if (drv == "QPSQL" || drv == "QPSQL7")
+  else if (drv == QStringLiteral("QPSQL") || drv == QStringLiteral("QPSQL7"))
 	{
 	    editHostname->setEnabled(true);
 	    spinPort->setEnabled(true);
 	    editUsername->setEnabled(true);
 	    checkAskPassword->setEnabled(true);
 	    updatePasswordStatus();
-	    labelDatabase->setText("Database");
+      labelDatabase->setText(QStringLiteral("Database"));
 	    buttonSelectFile->setEnabled(false);
 	}
 	else
@@ -134,7 +134,7 @@ public:
 	    editUsername->setEnabled(true);
 	    checkAskPassword->setEnabled(true);
 	    updatePasswordStatus();
-	    labelDatabase->setText("Database");
+      labelDatabase->setText(QStringLiteral("Database"));
 	    buttonSelectFile->setEnabled(false);
 	}
     }
@@ -158,15 +158,15 @@ public slots:
 
 	if (ce.isValid())
 	{
-	    QMessageBox::critical(this, "Testing Connection",
-				  QString("Connection failed:\n%1\n%2")
+      QMessageBox::critical(this, QStringLiteral("Testing Connection"),
+          QString(QStringLiteral("Connection failed:\n%1\n%2"))
 				  .arg(ce.driverText())
 				  .arg(ce.databaseText()));
 	}
 	else
 	{
-	    QMessageBox::information(this, "Testing Connection",
-				     QString("Connection established successfully."));
+      QMessageBox::information(this, QStringLiteral("Testing Connection"),
+             QString(QStringLiteral("Connection established successfully.")));
 	}
     }
 
@@ -183,9 +183,9 @@ public slots:
 
     void on_buttonSelectFile_clicked()
     {
-	QString filename = QFileDialog::getOpenFileName(this, "Choose a SQLite database file",
+  QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Choose a SQLite database file"),
 							QString(),
-							"SQLite databases (*.db);;All Files (*.*)");
+              QStringLiteral("SQLite databases (*.db);;All Files (*.*)"));
 
 	if (filename.isEmpty()) return;
 	editDatabase->setText(filename);

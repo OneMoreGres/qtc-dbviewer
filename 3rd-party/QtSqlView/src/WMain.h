@@ -8,8 +8,8 @@
 #ifndef _WMain_H_
 #define _WMain_H_
 
-#include <QtGui/QMainWindow>
-#include <QtGui/QFileDialog>
+#include <QMainWindow>
+#include <QFileDialog>
 #include <QtGui/QClipboard>
 
 #include <QtCore/QDebug>
@@ -63,7 +63,7 @@ public:
 	queryTable->setModel(&userquerymodel);
 
 	// configure query editor
-	QFont font("Courier", 10);
+  QFont font(QStringLiteral("Courier"), 10);
 	font.setFixedPitch(true);
 	editQuery->setFont(font);
 
@@ -105,8 +105,8 @@ public slots:
 
 	if (selectednum < 0)
 	{
-	    QMessageBox::critical(this, "QtSqlView",
-				  "No database connection selected. Click on one of the entries in the database list.");
+      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
+          QStringLiteral("No database connection selected. Click on one of the entries in the database list."));
 	}
 	else
 	{
@@ -127,8 +127,8 @@ public slots:
 
 	if (selectednum < 0)
 	{
-	    QMessageBox::critical(this, "QtSqlView",
-				  "No database connection selected. Click on one of the entries in the database list.");
+      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
+          QStringLiteral("No database connection selected. Click on one of the entries in the database list."));
 	}
 	else
 	{
@@ -148,44 +148,44 @@ public slots:
 
     void on_action_About_triggered()
     {
-	QMessageBox::about(this, "About QtSqlView",
-                           "QtSqlView is a simple SQL database browser\n"
-			   "built on Qt's excellent components.\n\n"
-                           "Copyright 2006 Timo Bingmann\n"
-			   "Released under the GNU General Public License v2\n\n"
-                           "Visit http://idlebox.net/2006/qtsqlview/\n"
-			   "for updates and more.\n");
+  QMessageBox::about(this, QStringLiteral("About QtSqlView"),
+                           QStringLiteral("QtSqlView is a simple SQL database browser\n") +
+         QStringLiteral("built on Qt's excellent components.\n\n") +
+                           QStringLiteral("Copyright 2006 Timo Bingmann\n") +
+         QStringLiteral("Released under the GNU General Public License v2\n\n") +
+                           QStringLiteral("Visit http://idlebox.net/2006/qtsqlview/\n") +
+         QStringLiteral("for updates and more.\n"));
     }
 
     // copied from qt-4.2.0's QDesktopServices
 
     inline static bool launch(const QUrl &url, const QString &client)
     {
-	return (QProcess::startDetached(client + " " + url.toEncoded()));
+  return (QProcess::startDetached(client + QStringLiteral(" ") + QString::fromUtf8(url.toEncoded())));
     }
 
     void on_action_VisitWebsite_triggered()
     {
-	QUrl url("http://idlebox.net/2006/qtsqlview/");
+  QUrl url(QStringLiteral("http://idlebox.net/2006/qtsqlview/"));
 
 #ifdef Q_WS_WIN
 	QT_WA({ ShellExecute(0, 0, (TCHAR*)QString(url.toEncoded()).utf16(), 0, 0, SW_SHOWNORMAL); },
 	      { ShellExecuteA(0, 0, QString(url.toEncoded()).toLocal8Bit(), 0, 0, SW_SHOWNORMAL); });
 #else
-	if (launch(url, "firefox"))
+  if (launch(url, QStringLiteral("firefox")))
 	    return;
-	if (launch(url, "mozilla"))
+  if (launch(url, QStringLiteral("mozilla")))
 	    return;
-	if (launch(url, "netscape"))
+  if (launch(url, QStringLiteral("netscape")))
 	    return;
-	if (launch(url, "opera"))
+  if (launch(url, QStringLiteral("opera")))
 	    return;
 #endif
     }
 
     void on_action_AboutQt_triggered()
     {
-	QMessageBox::aboutQt(this, "About Qt");
+  QMessageBox::aboutQt(this, QStringLiteral("About Qt"));
     }
 
     // *** Triggers of the DbList TreeView
@@ -350,7 +350,7 @@ public slots:
     static void save_to_clipboard(QSqlQuery query, const QItemSelection &sellist, QClipboard::Mode mode)
     {
 	if (!query.isSelect() || !query.isActive()) {
-	    qDebug() << "bad query";
+      qDebug() << QStringLiteral("bad query");
 	    return;
 	}
 
@@ -359,7 +359,7 @@ public slots:
 	Q_FOREACH(const QItemSelectionRange &selrange, sellist)
 	{
 	    if (!query.seek(selrange.top())) {
-		qDebug() << "Could not seek in result";
+    qDebug() << QStringLiteral("Could not seek in result");
 		continue;
 	    }
 
@@ -367,10 +367,10 @@ public slots:
 	    {
 		for(int fi = selrange.left(); fi <= selrange.right(); ++fi)
 		{
-		    if (fi != selrange.left()) seltext += "\t";
+        if (fi != selrange.left()) seltext += QStringLiteral("\t");
 		    seltext += query.value(fi).toString();
 		}
-		seltext += "\n";
+    seltext += QStringLiteral("\n");
 		query.next();
 	    }
 	}
@@ -400,7 +400,7 @@ public slots:
 	    queryTable->hide();
 	    queryResultText->show();
 
-	    queryResultText->setPlainText("No database connection selected.\nAdd and activate a connection in the left tree view.");
+      queryResultText->setPlainText(QStringLiteral("No database connection selected.\nAdd and activate a connection in the left tree view."));
 	    return;
 	}
 
@@ -411,7 +411,7 @@ public slots:
 		queryTable->hide();
 		queryResultText->show();
 
-		queryResultText->setPlainText(QString("%1\n%2")
+    queryResultText->setPlainText(QString(QStringLiteral("%1\n%2"))
 					      .arg(ce.driverText())
 					      .arg(ce.databaseText()));
 		return;
@@ -426,7 +426,7 @@ public slots:
 	    queryTable->hide();
 	    queryResultText->show();
 
-	    queryResultText->setPlainText(QString("%1\n%2")
+      queryResultText->setPlainText(QString(QStringLiteral("%1\n%2"))
 					  .arg(userquerymodel.lastError().driverText())
 					  .arg(userquerymodel.lastError().databaseText()));
 	}
@@ -446,7 +446,7 @@ public slots:
 		queryTable->hide();
 		queryResultText->show();
 
-		queryResultText->setPlainText(QString("%1 rows affected.")
+    queryResultText->setPlainText(QString(QStringLiteral("%1 rows affected."))
 					      .arg( userquerymodel.query().numRowsAffected() ));
 	    }
 	}
@@ -467,41 +467,41 @@ public slots:
 
     void on_loadQueryButton_clicked()
     {
-	QString filename = QFileDialog::getOpenFileName(this, "Choose a SQL text file",
+  QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Choose a SQL text file"),
 							QString(),
-							"SQL text files (*.sql *.txt);;All Files (*.*)");
+              QStringLiteral("SQL text files (*.sql *.txt);;All Files (*.*)"));
 
 	if (filename.isEmpty()) return;
 
 	QFile file(filename);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-	    QMessageBox::critical(this, "QtSqlView",
-				  "Could not load sql query text file");
+      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
+          QStringLiteral("Could not load sql query text file"));
 	    return;
 	}
 
-	editQuery->setPlainText( file.readAll() );
+  editQuery->setPlainText( QString::fromLocal8Bit(file.readAll()) );
     }
 
     void on_saveQueryButton_clicked()
     {
-	QString filename = QFileDialog::getSaveFileName(this, "Choose a SQL text file",
+  QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Choose a SQL text file"),
 							QString(),
-							"SQL text files (*.sql *.txt);;All Files (*.*)");
+              QStringLiteral("SQL text files (*.sql *.txt);;All Files (*.*)"));
 	
 	if (filename.isEmpty()) return;
 
 	QFile file(filename);
 	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
-	    QMessageBox::critical(this, "QtSqlView",
-				  "Could not save sql query text file");
+      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
+          QStringLiteral("Could not save sql query text file"));
 	    return;
 	}
 
         QTextStream out(&file);
-	out << editQuery->toPlainText();
+  out << editQuery->toPlainText().toLocal8Bit();
     }
 };
 

@@ -17,9 +17,9 @@
 #include <QtSql/QSqlQuery>
 
 #include <QtGui/QIcon>
-#include <QtGui/QHeaderView>
-#include <QtGui/QMessageBox>
-#include <QtGui/QInputDialog>
+#include <QHeaderView>
+#include <QMessageBox>
+#include <QInputDialog>
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QVector>
@@ -42,28 +42,28 @@ struct DbParameter
 
     void saveToSettings(QSettings &settings) const
     {
-	settings.setValue("label", label);
-	settings.setValue("hostname", hostname);
-	settings.setValue("port", port);
-	settings.setValue("driver", driver);
-	settings.setValue("username", username);
-	settings.setValue("password", password);
-	settings.setValue("askpassword", askpassword);
-	settings.setValue("database", database);
-	settings.setValue("showsystables", showsystables);
+  settings.setValue(QStringLiteral("label"), label);
+  settings.setValue(QStringLiteral("hostname"), hostname);
+  settings.setValue(QStringLiteral("port"), port);
+  settings.setValue(QStringLiteral("driver"), driver);
+  settings.setValue(QStringLiteral("username"), username);
+  settings.setValue(QStringLiteral("password"), password);
+  settings.setValue(QStringLiteral("askpassword"), askpassword);
+  settings.setValue(QStringLiteral("database"), database);
+  settings.setValue(QStringLiteral("showsystables"), showsystables);
     }
 
     void loadFromSettings(QSettings &settings)
     {
-	label = settings.value("label").toString();
-	hostname = settings.value("hostname").toString();
-	port = settings.value("port", 0).toUInt();
-	driver = settings.value("driver").toString();
-	username = settings.value("username").toString();
-	password = settings.value("password").toString();
-	askpassword = settings.value("askpassword", 0).toUInt();
-	database = settings.value("database").toString();
-	showsystables = settings.value("showsystables", 0).toUInt();
+  label = settings.value(QStringLiteral("label")).toString();
+  hostname = settings.value(QStringLiteral("hostname")).toString();
+  port = settings.value(QStringLiteral("port"), 0).toUInt();
+  driver = settings.value(QStringLiteral("driver")).toString();
+  username = settings.value(QStringLiteral("username")).toString();
+  password = settings.value(QStringLiteral("password")).toString();
+  askpassword = settings.value(QStringLiteral("askpassword"), 0).toUInt();
+  database = settings.value(QStringLiteral("database")).toString();
+  showsystables = settings.value(QStringLiteral("showsystables"), 0).toUInt();
     }
 };
 
@@ -233,9 +233,9 @@ public:
     /// save all database parameters to settings
     void saveToSettings()
     {
-	QSettings settings ("idlebox.net", "QtSqlView");
+  QSettings settings (QStringLiteral("idlebox.net"), QStringLiteral("QtSqlView"));
 
-	settings.beginWriteArray("connections");
+  settings.beginWriteArray(QStringLiteral("connections"));
 	int i = 0;
 	Q_FOREACH(const DbConnection *dbc, list)
 	{
@@ -249,11 +249,11 @@ public:
     /// load all database parameters from settings
     void loadFromSettings()
     {
-	QSettings settings ("idlebox.net", "QtSqlView");
+  QSettings settings (QStringLiteral("idlebox.net"), QStringLiteral("QtSqlView"));
 
 	clear();
 
-	int connnum = settings.beginReadArray("connections");
+  int connnum = settings.beginReadArray(QStringLiteral("connections"));
 	for (int i = 0; i < connnum; ++i)
 	{
 	    settings.setArrayIndex(i);
@@ -284,9 +284,9 @@ public: // *** implements QAbstractItemModel
 		switch(section)
 		{
 		case 0:
-		    return "Connections";
+        return QStringLiteral("Connections");
 		default:
-		    return QString("Column %1").arg(section);
+        return QString(QStringLiteral("Column %1")).arg(section);
 		}
 	    }
 	    else
@@ -297,7 +297,7 @@ public: // *** implements QAbstractItemModel
 	    if (role != Qt::DisplayRole)
 		return QVariant();
 	    
-	    return QString("Row %1").arg(section);
+      return QString(QStringLiteral("Row %1")).arg(section);
 	}
     }
 
@@ -348,14 +348,14 @@ public: // *** implements QAbstractItemModel
 	    if (role == Qt::DisplayRole)
 	    {
 		if (dbc->dbparam.label.isEmpty()) {
-		    return "<no label>";
+        return QStringLiteral("<no label>");
 		}
 
 		return dbc->dbparam.label;
 	    }
 	    else if (role == Qt::DecorationRole)
 	    {
-		static QIcon dbicon(":/img/database.png");
+    static QIcon dbicon(QStringLiteral(":/img/database.png"));
 		return qVariantFromValue(dbicon);
 	    }
 	}
@@ -367,9 +367,9 @@ public: // *** implements QAbstractItemModel
 	    }
 	    else if (role == Qt::DecorationRole)
 	    {
-		static QIcon tableicon(":/img/table.png");
-		static QIcon tablesysicon(":/img/tablesys.png");
-		static QIcon viewicon(":/img/view.png");
+    static QIcon tableicon(QStringLiteral(":/img/table.png"));
+    static QIcon tablesysicon(QStringLiteral(":/img/tablesys.png"));
+    static QIcon viewicon(QStringLiteral(":/img/view.png"));
 
 		if (dbt->tabletype == 0)
 		    return qVariantFromValue(tableicon);
@@ -390,7 +390,7 @@ public: // *** implements QAbstractItemModel
 	    }
 	    else if (role == Qt::DecorationRole)
 	    {
-		static QIcon erroricon(":/img/error.png");
+    static QIcon erroricon(QStringLiteral(":/img/error.png"));
 		return qVariantFromValue(erroricon);
 	    }
 	}
@@ -657,17 +657,17 @@ public: // *** implements QAbstractItemModel
 		switch(section)
 		{
 		case 0:
-		    return "Connections";
+        return QStringLiteral("Connections");
 		case 1:
-		    return "Type";
+        return QStringLiteral("Type");
 		case 2:
-		    return "Length";
+        return QStringLiteral("Length");
 		case 3:
-		    return "Modifiers";
+        return QStringLiteral("Modifiers");
 		case 4:
-		    return "Default";
+        return QStringLiteral("Default");
 		default:
-		    return QString("Column %1").arg(section);
+        return QString(QStringLiteral("Column %1")).arg(section);
 		}
 	    }
 	}
@@ -705,27 +705,27 @@ public: // *** implements QAbstractItemModel
 		return field.length();
 
 	    case 3: {
-		QString mods = "";
+    QString mods = QStringLiteral("");
 
 		if (pindex.indexOf(field.name()) >= 0) {
-		    mods += "PRIMARY KEY";
+        mods += QStringLiteral("PRIMARY KEY");
 		}
 
 		if (field.requiredStatus() == QSqlField::Required)
 		{
-		    if (!mods.isEmpty()) mods += " ";
-		    mods += "NOT NULL";
+        if (!mods.isEmpty()) mods += QStringLiteral(" ");
+        mods += QStringLiteral("NOT NULL");
 		}
 		else if (field.requiredStatus() == QSqlField::Optional)
 		{
-		    if (!mods.isEmpty()) mods += " ";
-		    mods += "NULL";
+        if (!mods.isEmpty()) mods += QStringLiteral(" ");
+        mods += QStringLiteral("NULL");
 		}
 
 		if (field.isAutoValue())
 		{
-		    if (!mods.isEmpty()) mods += " ";
-		    mods += "AUTO_INCREMENT";
+        if (!mods.isEmpty()) mods += QStringLiteral(" ");
+        mods += QStringLiteral("AUTO_INCREMENT");
 		}
 
 		return mods;
