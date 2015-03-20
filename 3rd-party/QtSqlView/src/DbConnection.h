@@ -40,6 +40,7 @@ struct DbParameter {
   int askpassword;
   QString database;
   int showsystables;
+  QString connectOptions;
 
   void saveToSettings (QSettings &settings) const {
     settings.setValue (QStringLiteral ("label"), label);
@@ -53,6 +54,7 @@ struct DbParameter {
     settings.setValue (QStringLiteral ("askpassword"), askpassword);
     settings.setValue (QStringLiteral ("database"), database);
     settings.setValue (QStringLiteral ("showsystables"), showsystables);
+    settings.setValue (QStringLiteral ("connectoptions"), connectOptions);
   }
 
   void loadFromSettings (QSettings &settings) {
@@ -65,6 +67,7 @@ struct DbParameter {
     askpassword = settings.value (QStringLiteral ("askpassword"), 0).toUInt ();
     database = settings.value (QStringLiteral ("database")).toString ();
     showsystables = settings.value (QStringLiteral ("showsystables"), 0).toUInt ();
+    connectOptions = settings.value (QStringLiteral ("connectoptions")).toString ();
   }
 };
 

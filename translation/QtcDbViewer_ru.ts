@@ -197,6 +197,11 @@
     </message>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WConnection.ui" line="202"/>
+        <source>Options</source>
+        <translation>Параметры</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.ui" line="239"/>
         <source>Test</source>
         <translation>Проверить</translation>
     </message>

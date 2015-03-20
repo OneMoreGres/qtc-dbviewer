@@ -32,6 +32,7 @@ QSqlError DbConnection::connect (DbList &dblist) {
   }
   db.setDatabaseName (dbparam.database);
   db.setUserName (dbparam.username);
+  db.setConnectOptions (dbparam.connectOptions);
 
   if (dbparam.askpassword && dbparam.password.isEmpty ()) {
     bool ok;

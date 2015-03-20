@@ -88,6 +88,7 @@ class WConnection : public QDialog, private Ui::WConnection {
         checkAskPassword->setChecked (dbp->askpassword);
         editDatabase->setText (dbp->database);
         checkSysTables->setChecked (dbp->showsystables);
+        editOptions->setText (dbp->connectOptions);
       }
 
       updatePasswordStatus ();
@@ -108,6 +109,7 @@ class WConnection : public QDialog, private Ui::WConnection {
       }
       dbp.database = editDatabase->text ();
       dbp.showsystables = checkSysTables->isChecked ();
+      dbp.connectOptions = editOptions->text ();
     }
 
     void updatePasswordStatus () {
