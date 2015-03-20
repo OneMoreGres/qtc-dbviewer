@@ -36,8 +36,11 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
   initLanguage ();
 
   Core::IMode *dbViewMode = new Core::IMode;
+  dbViewMode->setId (Constants::QTCDBVIEWER_ID);
+  dbViewMode->setContext (Core::Context (Constants::QTCDBVIEWER_CONTEXT));
   dbViewMode->setDisplayName (QStringLiteral ("Db Viewer"));
   dbViewMode->setIcon (QIcon (QStringLiteral (":/icons/database.png")));
+  dbViewMode->setPriority (10);
   dbViewMode->setWidget (new WMain);
   addAutoReleasedObject (dbViewMode);
 
