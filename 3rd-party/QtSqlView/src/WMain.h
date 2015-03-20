@@ -38,6 +38,7 @@ class WMain : public QMainWindow, public Ui::WMain {
       datatablemodel (NULL) {
       setupUi (this);
       statusBar ()->hide ();
+      menuBar ()->hide ();
 
       dblist.loadFromSettings ();
 
