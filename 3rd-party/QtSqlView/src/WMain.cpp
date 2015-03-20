@@ -13,17 +13,6 @@
 
 #include <assert.h>
 
-//int main(int argc, char **argv)
-//{
-//    QApplication a( argc, argv );
-
-//    WMain wmain;
-//    wmain.show();
-//    a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()) );
-
-//    return a.exec();
-//}
-
 QSqlError DbConnection::connect (DbList &dblist) {
   assert (!dbuuid.isNull ());
 
