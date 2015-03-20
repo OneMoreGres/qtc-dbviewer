@@ -15,180 +15,194 @@
 
 #include "DbConnection.h"
 
-class WConnection : public QDialog, private Ui::WConnection
-{
-    Q_OBJECT
+class WConnection : public QDialog, private Ui::WConnection {
+  Q_OBJECT
 
-    QString getDescription(QString drv)
-    {
-  if (0) return QStringLiteral("");
-  else if (drv == QStringLiteral("QDB2"))		return QStringLiteral("IBM DB2");
-  else if (drv == QStringLiteral("QIBASE"))	return QStringLiteral("Borland InterBase");
-  else if (drv == QStringLiteral("QOCI"))		return QStringLiteral("Oracle Call Interface");
-  else if (drv == QStringLiteral("QODBC"))	return QStringLiteral("ODBC");
-  else if (drv == QStringLiteral("QODBC3"))	return QStringLiteral("ODBC");
-  else if (drv == QStringLiteral("QTDS"))		return QStringLiteral("Sybase Adaptive Server");
-
-  else if (drv == QStringLiteral("QMYSQL"))	return QStringLiteral("MySQL 4.x");
-  else if (drv == QStringLiteral("QMYSQL3"))	return QStringLiteral("MySQL 3.x");
-  else if (drv == QStringLiteral("QPSQL"))	return QStringLiteral("PostgreSQL 8.x");
-  else if (drv == QStringLiteral("QPSQL7"))	return QStringLiteral("PostgreSQL 7.x");
-  else if (drv == QStringLiteral("QSQLITE"))	return QStringLiteral("SQLite 3.x");
-  else if (drv == QStringLiteral("QSQLITE2"))	return QStringLiteral("SQLite 2.x");
-	else return QString::null;
+  QString getDescription (QString drv) {
+    if (0) {
+      return QStringLiteral ("");
+    }
+    else if (drv == QStringLiteral ("QDB2")) {
+      return QStringLiteral ("IBM DB2");
+    }
+    else if (drv == QStringLiteral ("QIBASE")) {
+      return QStringLiteral ("Borland InterBase");
+    }
+    else if (drv == QStringLiteral ("QOCI")) {
+      return QStringLiteral ("Oracle Call Interface");
+    }
+    else if (drv == QStringLiteral ("QODBC")) {
+      return QStringLiteral ("ODBC");
+    }
+    else if (drv == QStringLiteral ("QODBC3")) {
+      return QStringLiteral ("ODBC");
+    }
+    else if (drv == QStringLiteral ("QTDS")) {
+      return QStringLiteral ("Sybase Adaptive Server");
     }
 
-public:
-    WConnection(QWidget *parent, const DbParameter *dbp)
-	: QDialog(parent)
-    {
-	setupUi(this);
+    else if (drv == QStringLiteral ("QMYSQL")) {
+      return QStringLiteral ("MySQL 4.x");
+    }
+    else if (drv == QStringLiteral ("QMYSQL3")) {
+      return QStringLiteral ("MySQL 3.x");
+    }
+    else if (drv == QStringLiteral ("QPSQL")) {
+      return QStringLiteral ("PostgreSQL 8.x");
+    }
+    else if (drv == QStringLiteral ("QPSQL7")) {
+      return QStringLiteral ("PostgreSQL 7.x");
+    }
+    else if (drv == QStringLiteral ("QSQLITE")) {
+      return QStringLiteral ("SQLite 3.x");
+    }
+    else if (drv == QStringLiteral ("QSQLITE2")) {
+      return QStringLiteral ("SQLite 2.x");
+    }
+    else{return QString::null; }
+  }
 
-	Q_FOREACH(QString drv, QSqlDatabase::drivers())
-	{
-	    QString desc = getDescription(drv);
-	    if (desc.isNull())
-		comboType->addItem(drv, drv);
-	    else
-    comboType->addItem(QString(QStringLiteral("%1 (%2)")).arg(desc).arg(drv),
-				   drv);
-	}
+  public:
+    WConnection (QWidget *parent, const DbParameter *dbp)
+      : QDialog (parent) {
+      setupUi (this);
 
-	if (dbp)
-	{
-	    editLabel->setText(dbp->label);
-	    comboType->setCurrentIndex( comboType->findData(dbp->driver) );
-	    editHostname->setText(dbp->hostname);
-	    spinPort->setValue(dbp->port);
-	    editUsername->setText(dbp->username);
-	    editPassword->setText(dbp->password);
-	    checkAskPassword->setChecked(dbp->askpassword);
-	    editDatabase->setText(dbp->database);
-	    checkSysTables->setChecked(dbp->showsystables);
-	}
-	
-	updatePasswordStatus();
+      Q_FOREACH (QString drv, QSqlDatabase::drivers ()) {
+        QString desc = getDescription (drv);
+        if (desc.isNull ()) {
+          comboType->addItem (drv, drv);
+        }
+        else{
+          comboType->addItem (QString (QStringLiteral ("%1 (%2)")).arg (desc).arg (drv),
+                              drv);
+        }
+      }
+
+      if (dbp) {
+        editLabel->setText (dbp->label);
+        comboType->setCurrentIndex (comboType->findData (dbp->driver) );
+        editHostname->setText (dbp->hostname);
+        spinPort->setValue (dbp->port);
+        editUsername->setText (dbp->username);
+        editPassword->setText (dbp->password);
+        checkAskPassword->setChecked (dbp->askpassword);
+        editDatabase->setText (dbp->database);
+        checkSysTables->setChecked (dbp->showsystables);
+      }
+
+      updatePasswordStatus ();
     }
 
-    DbParameter	dbp;
-    
-    void fetchDbParameter()
-    {
-	dbp.label = editLabel->text();
-	dbp.driver = comboType->itemData( comboType->currentIndex() ).toString();
-	dbp.hostname = editHostname->text();
-	dbp.port = spinPort->value();
-	dbp.username = editUsername->text();
-	dbp.password = editPassword->text();
-	dbp.askpassword = checkAskPassword->isChecked();
-	if (dbp.askpassword)
-	    dbp.password.clear();
-	dbp.database = editDatabase->text();
-	dbp.showsystables = checkSysTables->isChecked();
+    DbParameter dbp;
+
+    void fetchDbParameter () {
+      dbp.label = editLabel->text ();
+      dbp.driver = comboType->itemData (comboType->currentIndex () ).toString ();
+      dbp.hostname = editHostname->text ();
+      dbp.port = spinPort->value ();
+      dbp.username = editUsername->text ();
+      dbp.password = editPassword->text ();
+      dbp.askpassword = checkAskPassword->isChecked ();
+      if (dbp.askpassword) {
+        dbp.password.clear ();
+      }
+      dbp.database = editDatabase->text ();
+      dbp.showsystables = checkSysTables->isChecked ();
     }
 
-    void updatePasswordStatus()
-    {
-	if (!checkAskPassword->isEnabled()) return;
-	editPassword->setEnabled( !checkAskPassword->isChecked() );
+    void updatePasswordStatus () {
+      if (!checkAskPassword->isEnabled ()) {
+        return;
+      }
+      editPassword->setEnabled (!checkAskPassword->isChecked () );
     }
 
-    void updateFields()
-    {
-	const QString &drv = dbp.driver;
+    void updateFields () {
+      const QString &drv = dbp.driver;
 
-  if (drv == QStringLiteral("QSQLITE") || drv == QStringLiteral("QSQLITE2"))
-	{
-	    editHostname->setEnabled(false);
-	    spinPort->setEnabled(false);
-	    editUsername->setEnabled(false);
-	    editPassword->setEnabled(false);
-	    checkAskPassword->setEnabled(false);
-      labelDatabase->setText(QStringLiteral("Filename"));
-	    buttonSelectFile->setEnabled(true);
-	}
-  else if (drv == QStringLiteral("QMYSQL") || drv == QStringLiteral("QMYSQL3"))
-	{
-	    editHostname->setEnabled(true);
-	    spinPort->setEnabled(true);
-	    editUsername->setEnabled(true);
-	    checkAskPassword->setEnabled(true);
-	    updatePasswordStatus();
-      labelDatabase->setText(QStringLiteral("Database"));
-	    buttonSelectFile->setEnabled(false);
-	}
-  else if (drv == QStringLiteral("QPSQL") || drv == QStringLiteral("QPSQL7"))
-	{
-	    editHostname->setEnabled(true);
-	    spinPort->setEnabled(true);
-	    editUsername->setEnabled(true);
-	    checkAskPassword->setEnabled(true);
-	    updatePasswordStatus();
-      labelDatabase->setText(QStringLiteral("Database"));
-	    buttonSelectFile->setEnabled(false);
-	}
-	else
-	{
-	    editHostname->setEnabled(true);
-	    spinPort->setEnabled(true);
-	    editUsername->setEnabled(true);
-	    checkAskPassword->setEnabled(true);
-	    updatePasswordStatus();
-      labelDatabase->setText(QStringLiteral("Database"));
-	    buttonSelectFile->setEnabled(false);
-	}
+      if (drv == QStringLiteral ("QSQLITE") || drv == QStringLiteral ("QSQLITE2")) {
+        editHostname->setEnabled (false);
+        spinPort->setEnabled (false);
+        editUsername->setEnabled (false);
+        editPassword->setEnabled (false);
+        checkAskPassword->setEnabled (false);
+        labelDatabase->setText (QStringLiteral ("Filename"));
+        buttonSelectFile->setEnabled (true);
+      }
+      else if (drv == QStringLiteral ("QMYSQL") || drv == QStringLiteral ("QMYSQL3")) {
+        editHostname->setEnabled (true);
+        spinPort->setEnabled (true);
+        editUsername->setEnabled (true);
+        checkAskPassword->setEnabled (true);
+        updatePasswordStatus ();
+        labelDatabase->setText (QStringLiteral ("Database"));
+        buttonSelectFile->setEnabled (false);
+      }
+      else if (drv == QStringLiteral ("QPSQL") || drv == QStringLiteral ("QPSQL7")) {
+        editHostname->setEnabled (true);
+        spinPort->setEnabled (true);
+        editUsername->setEnabled (true);
+        checkAskPassword->setEnabled (true);
+        updatePasswordStatus ();
+        labelDatabase->setText (QStringLiteral ("Database"));
+        buttonSelectFile->setEnabled (false);
+      }
+      else{
+        editHostname->setEnabled (true);
+        spinPort->setEnabled (true);
+        editUsername->setEnabled (true);
+        checkAskPassword->setEnabled (true);
+        updatePasswordStatus ();
+        labelDatabase->setText (QStringLiteral ("Database"));
+        buttonSelectFile->setEnabled (false);
+      }
     }
 
-public slots:
+  public slots:
 
-    void on_okButton_clicked()
-    {
-	fetchDbParameter();
-	accept();
+    void on_okButton_clicked () {
+      fetchDbParameter ();
+      accept ();
     }
 
-    void on_testButton_clicked()
-    {
-	fetchDbParameter();
+    void on_testButton_clicked () {
+      fetchDbParameter ();
 
-	DbConnection conn(dbp);
-	DbList dblist;
+      DbConnection conn (dbp);
+      DbList dblist;
 
-	QSqlError ce = conn.connect(dblist);
+      QSqlError ce = conn.connect (dblist);
 
-	if (ce.isValid())
-	{
-      QMessageBox::critical(this, QStringLiteral("Testing Connection"),
-          QString(QStringLiteral("Connection failed:\n%1\n%2"))
-				  .arg(ce.driverText())
-				  .arg(ce.databaseText()));
-	}
-	else
-	{
-      QMessageBox::information(this, QStringLiteral("Testing Connection"),
-             QString(QStringLiteral("Connection established successfully.")));
-	}
+      if (ce.isValid ()) {
+        QMessageBox::critical (this, QStringLiteral ("Testing Connection"),
+                               QString (QStringLiteral ("Connection failed:\n%1\n%2"))
+                               .arg (ce.driverText ())
+                               .arg (ce.databaseText ()));
+      }
+      else{
+        QMessageBox::information (this, QStringLiteral ("Testing Connection"),
+                                  QString (QStringLiteral ("Connection established successfully.")));
+      }
     }
 
-    void on_checkAskPassword_clicked()
-    {
-	updatePasswordStatus();
+    void on_checkAskPassword_clicked () {
+      updatePasswordStatus ();
     }
 
-    void on_comboType_currentIndexChanged(int index)
-    {
-	dbp.driver = comboType->itemData(index).toString();
-	updateFields();
+    void on_comboType_currentIndexChanged (int index) {
+      dbp.driver = comboType->itemData (index).toString ();
+      updateFields ();
     }
 
-    void on_buttonSelectFile_clicked()
-    {
-  QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Choose a SQLite database file"),
-							QString(),
-              QStringLiteral("SQLite databases (*.db);;All Files (*.*)"));
+    void on_buttonSelectFile_clicked () {
+      QString filename = QFileDialog::getOpenFileName (this, QStringLiteral ("Choose a SQLite database file"),
+                                                       QString (),
+                                                       QStringLiteral ("SQLite databases (*.db);;All Files (*.*)"));
 
-	if (filename.isEmpty()) return;
-	editDatabase->setText(filename);
+      if (filename.isEmpty ()) {
+        return;
+      }
+      editDatabase->setText (filename);
     }
 };
 

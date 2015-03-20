@@ -20,71 +20,68 @@
 //    WMain wmain;
 //    wmain.show();
 //    a.connect( &a, SIGNAL(lastWindowClosed()), &a, SLOT(quit()) );
-    
+
 //    return a.exec();
 //}
 
-QSqlError DbConnection::connect(DbList &dblist)
-{
-    assert(!dbuuid.isNull());
+QSqlError DbConnection::connect (DbList &dblist) {
+  assert (!dbuuid.isNull ());
 
-    if (!QSqlDatabase::isDriverAvailable(dbparam.driver))
-    {
-  QSqlError e = QSqlError(QStringLiteral("Could not connect to database"),
-        QString(QStringLiteral("Database driver %1 is not available.")).arg(dbparam.driver),
-				QSqlError::ConnectionError);
-	dblist.tablelist_seterror(*this, e);
-	return e;
+  if (!QSqlDatabase::isDriverAvailable (dbparam.driver)) {
+    QSqlError e = QSqlError (QStringLiteral ("Could not connect to database"),
+                             QString (QStringLiteral ("Database driver %1 is not available.")).arg (dbparam.driver),
+                             QSqlError::ConnectionError);
+    dblist.tablelist_seterror (*this, e);
+    return e;
+  }
+
+  db = QSqlDatabase::addDatabase (dbparam.driver, dbuuid.toString ());
+
+  db.setHostName (dbparam.hostname);
+  if (dbparam.port > 0) {
+    db.setPort (dbparam.port);
+  }
+  db.setDatabaseName (dbparam.database);
+  db.setUserName (dbparam.username);
+
+  if (dbparam.askpassword) {
+    bool ok;
+    QString passwd = QInputDialog::getText (NULL, QStringLiteral ("QtSqlView Password Prompt"),
+                                            QString (QStringLiteral ("Enter password for '%1':")).arg (dbparam.label),
+                                            QLineEdit::Password, QString::null, &ok);
+
+    if (!ok) {
+      QSqlError e = QSqlError (QStringLiteral ("Could not connect to database"),
+                               QStringLiteral ("Password prompt failed."),
+                               QSqlError::ConnectionError);
+      dblist.tablelist_seterror (*this, e);
+      return e;
     }
+  }
+  else {
+    db.setPassword (dbparam.password);
+  }
 
-    db = QSqlDatabase::addDatabase(dbparam.driver, dbuuid.toString());
-	
-    db.setHostName(dbparam.hostname);
-    if (dbparam.port > 0) db.setPort(dbparam.port);
-    db.setDatabaseName(dbparam.database);
-    db.setUserName(dbparam.username);
+  if (!db.open ()) {
+    QSqlError e = db.lastError ();
+    db = QSqlDatabase ();
+    QSqlDatabase::removeDatabase (dbuuid.toString ());
+    dblist.tablelist_seterror (*this, e);
+    return e;
+  }
 
-    if (dbparam.askpassword)
-    {
-	bool ok;
-  QString passwd = QInputDialog::getText(NULL, QStringLiteral("QtSqlView Password Prompt"),
-                 QString(QStringLiteral("Enter password for '%1':")).arg(dbparam.label),
-					       QLineEdit::Password, QString::null, &ok);
+  dblist.tablelist_load (*this);
 
-	if (!ok) {
-      QSqlError e = QSqlError(QStringLiteral("Could not connect to database"),
-            QStringLiteral("Password prompt failed."),
-				    QSqlError::ConnectionError);
-	    dblist.tablelist_seterror(*this, e);
-	    return e;
-	}
-    }
-    else {
-	db.setPassword(dbparam.password);
-    }
-	
-    if (!db.open()) {
-	QSqlError e = db.lastError();
-	db = QSqlDatabase();
-  QSqlDatabase::removeDatabase(dbuuid.toString());
-	dblist.tablelist_seterror(*this, e);
-	return e;
-    }
-
-    dblist.tablelist_load(*this);
-
-    return QSqlError();
+  return QSqlError ();
 }
 
-void DbConnection::disconnect(class DbList &dblist)
-{
-    if (db.isOpen())
-    {
-	db.close();
-	db = QSqlDatabase();
+void DbConnection::disconnect (class DbList &dblist) {
+  if (db.isOpen ()) {
+    db.close ();
+    db = QSqlDatabase ();
 
-  QSqlDatabase::removeDatabase(dbuuid.toString());
-    }
-    dblist.tablelist_clear(*this);
+    QSqlDatabase::removeDatabase (dbuuid.toString ());
+  }
+  dblist.tablelist_clear (*this);
 }
 

@@ -13,36 +13,34 @@
 #include <QtGui/QSyntaxHighlighter>
 #include <QtGui/QTextCharFormat>
 
-class SQLHighlighter : public QSyntaxHighlighter
-{
-    Q_OBJECT
+class SQLHighlighter : public QSyntaxHighlighter {
+  Q_OBJECT
 
-public:
-    SQLHighlighter(class QTextDocument *parent = NULL);
+  public:
+    SQLHighlighter (class QTextDocument *parent = NULL);
 
-protected:
-    virtual void highlightBlock(const QString &text);
+  protected:
+    virtual void highlightBlock (const QString &text);
 
-private:
-    struct Rule
-    {
-	QRegExp 	pattern;
-	QTextCharFormat format;
+  private:
+    struct Rule {
+      QRegExp pattern;
+      QTextCharFormat format;
 
-	inline Rule()
-	{ }
+      inline Rule () {
+      }
 
-	inline Rule(QString p, QTextCharFormat f)
-	    : pattern(p, Qt::CaseInsensitive), format(f)
-	{ }
+      inline Rule (QString p, QTextCharFormat f)
+        : pattern (p, Qt::CaseInsensitive), format (f) {
+      }
     };
 
-    QVector<Rule> 	rules;
+    QVector<Rule>   rules;
 
-    QRegExp 		commentStartExpression;
-    QRegExp 		commentEndExpression;
+    QRegExp commentStartExpression;
+    QRegExp commentEndExpression;
 
-    QTextCharFormat 	commentFormat;
+    QTextCharFormat commentFormat;
 };
 
 #endif // _SQLHighlighter_H_

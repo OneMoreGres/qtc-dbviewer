@@ -24,484 +24,456 @@
 #include "SQLHighlighter.h"
 
 #ifdef Q_WS_WIN
-#include <windows.h>
-#include <shlobj.h>
-#include <intshcut.h>
+#  include <windows.h>
+#  include <shlobj.h>
+#  include <intshcut.h>
 #endif
 
-class WMain : public QMainWindow, public Ui::WMain
-{
-    Q_OBJECT
+class WMain : public QMainWindow, public Ui::WMain {
+  Q_OBJECT
 
-public:
-    WMain()
-	: QMainWindow(),
-	  datatablemodel(NULL)
-    {
-	setupUi(this);
-	statusBar()->hide();
+  public:
+    WMain ()
+      : QMainWindow (),
+      datatablemodel (NULL) {
+      setupUi (this);
+      statusBar ()->hide ();
 
-	dblist.loadFromSettings();
+      dblist.loadFromSettings ();
 
-	treeDbList->setModel(&dblist);
+      treeDbList->setModel (&dblist);
 
-	treeDbList->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(treeDbList, SIGNAL(customContextMenuRequested(const QPoint&)),
-		this, SLOT(show_treeDbList_contextMenu(const QPoint &)));
+      treeDbList->setContextMenuPolicy (Qt::CustomContextMenu);
+      connect (treeDbList, SIGNAL (customContextMenuRequested (const QPoint &)),
+               this, SLOT (show_treeDbList_contextMenu (const QPoint &)));
 
-	dataTable->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(dataTable, SIGNAL(customContextMenuRequested(const QPoint&)),
-		this, SLOT(show_dataTable_contextMenu(const QPoint &)));
+      dataTable->setContextMenuPolicy (Qt::CustomContextMenu);
+      connect (dataTable, SIGNAL (customContextMenuRequested (const QPoint &)),
+               this, SLOT (show_dataTable_contextMenu (const QPoint &)));
 
-	connect(dataTable->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)),
-		this, SLOT(slot_dataTable_horizontalHeader_sectionDoubleClicked(int)));
+      connect (dataTable->horizontalHeader (), SIGNAL (sectionDoubleClicked (int)),
+               this, SLOT (slot_dataTable_horizontalHeader_sectionDoubleClicked (int)));
 
-	schemaTable->setModel(&schemamodel);
-	schemaTable->verticalHeader()->hide();
+      schemaTable->setModel (&schemamodel);
+      schemaTable->verticalHeader ()->hide ();
 
-	queryTable->hide();
-	queryTable->setModel(&userquerymodel);
+      queryTable->hide ();
+      queryTable->setModel (&userquerymodel);
 
-	// configure query editor
-  QFont font(QStringLiteral("Courier"), 10);
-	font.setFixedPitch(true);
-	editQuery->setFont(font);
+      // configure query editor
+      QFont font (QStringLiteral ("Courier"), 10);
+      font.setFixedPitch (true);
+      editQuery->setFont (font);
 
-	new SQLHighlighter(editQuery->document());
+      new SQLHighlighter (editQuery->document ());
     }
 
-    DbList	dblist;
+    DbList dblist;
 
-    virtual void closeEvent(QCloseEvent *)
-    {
-	dblist.saveToSettings();
+    virtual void closeEvent (QCloseEvent *) {
+      dblist.saveToSettings ();
     }
 
-    QSqlTableModel	*datatablemodel;
-    int			datatablemodel_lastsort;
+    QSqlTableModel  *datatablemodel;
+    int datatablemodel_lastsort;
 
-    DbSchemaModel	schemamodel;
+    DbSchemaModel schemamodel;
 
-    QSqlQueryModel 	userquerymodel;
+    QSqlQueryModel userquerymodel;
 
-public slots:
+  public slots:
     // *** Menu Actions ***
 
-    void on_action_AddConnection_triggered()
-    {
-	WConnection wc(this, NULL);
+    void on_action_AddConnection_triggered () {
+      WConnection wc (this, NULL);
 
-	if (wc.exec() == QDialog::Accepted)
-	{
-	    dblist.addDbConnection( wc.dbp );
-	}
+      if (wc.exec () == QDialog::Accepted) {
+        dblist.addDbConnection (wc.dbp);
+      }
     }
 
-    void on_action_EditConnection_triggered()
-    {
-	QModelIndex selected = treeDbList->currentIndex();
+    void on_action_EditConnection_triggered () {
+      QModelIndex selected = treeDbList->currentIndex ();
 
-	int selectednum = dblist.getDbConnectionNum(selected);
+      int selectednum = dblist.getDbConnectionNum (selected);
 
-	if (selectednum < 0)
-	{
-      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
-          QStringLiteral("No database connection selected. Click on one of the entries in the database list."));
-	}
-	else
-	{
-	    WConnection wc(this, &dblist.list[selectednum]->dbparam);
+      if (selectednum < 0) {
+        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
+                               QStringLiteral ("No database connection selected. Click on one of the entries in the database list."));
+      }
+      else{
+        WConnection wc (this, &dblist.list[selectednum]->dbparam);
 
-	    if (wc.exec() == QDialog::Accepted)
-	    {
-		dblist.editDbConnection(selectednum, wc.dbp);
-	    }
-	}
+        if (wc.exec () == QDialog::Accepted) {
+          dblist.editDbConnection (selectednum, wc.dbp);
+        }
+      }
     }
 
-    void on_action_RemoveConnection_triggered()
-    {
-	QModelIndex selected = treeDbList->currentIndex();
+    void on_action_RemoveConnection_triggered () {
+      QModelIndex selected = treeDbList->currentIndex ();
 
-	int selectednum = dblist.getDbConnectionNum(selected);
+      int selectednum = dblist.getDbConnectionNum (selected);
 
-	if (selectednum < 0)
-	{
-      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
-          QStringLiteral("No database connection selected. Click on one of the entries in the database list."));
-	}
-	else
-	{
-	    dblist.delDbConnection( selectednum );
-	}
+      if (selectednum < 0) {
+        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
+                               QStringLiteral ("No database connection selected. Click on one of the entries in the database list."));
+      }
+      else{
+        dblist.delDbConnection (selectednum);
+      }
     }
 
-    void on_action_RefreshTablelist_triggered()
-    {
-	dblist.refresh();
+    void on_action_RefreshTablelist_triggered () {
+      dblist.refresh ();
     }
 
-    void on_action_Exit_triggered()
-    {
-	close();
+    void on_action_Exit_triggered () {
+      close ();
     }
 
-    void on_action_About_triggered()
-    {
-  QMessageBox::about(this, QStringLiteral("About QtSqlView"),
-                           QStringLiteral("QtSqlView is a simple SQL database browser\n") +
-         QStringLiteral("built on Qt's excellent components.\n\n") +
-                           QStringLiteral("Copyright 2006 Timo Bingmann\n") +
-         QStringLiteral("Released under the GNU General Public License v2\n\n") +
-                           QStringLiteral("Visit http://idlebox.net/2006/qtsqlview/\n") +
-         QStringLiteral("for updates and more.\n"));
+    void on_action_About_triggered () {
+      QMessageBox::about (this, QStringLiteral ("About QtSqlView"),
+                          QStringLiteral ("QtSqlView is a simple SQL database browser\n") +
+                          QStringLiteral ("built on Qt's excellent components.\n\n") +
+                          QStringLiteral ("Copyright 2006 Timo Bingmann\n") +
+                          QStringLiteral ("Released under the GNU General Public License v2\n\n") +
+                          QStringLiteral ("Visit http://idlebox.net/2006/qtsqlview/\n") +
+                          QStringLiteral ("for updates and more.\n"));
     }
 
     // copied from qt-4.2.0's QDesktopServices
 
-    inline static bool launch(const QUrl &url, const QString &client)
-    {
-  return (QProcess::startDetached(client + QStringLiteral(" ") + QString::fromUtf8(url.toEncoded())));
+    inline static bool launch (const QUrl &url, const QString &client) {
+      return (QProcess::startDetached (client + QStringLiteral (" ") + QString::fromUtf8 (url.toEncoded ())));
     }
 
-    void on_action_VisitWebsite_triggered()
-    {
-  QUrl url(QStringLiteral("http://idlebox.net/2006/qtsqlview/"));
+    void on_action_VisitWebsite_triggered () {
+      QUrl url (QStringLiteral ("http://idlebox.net/2006/qtsqlview/"));
 
 #ifdef Q_WS_WIN
-	QT_WA({ ShellExecute(0, 0, (TCHAR*)QString(url.toEncoded()).utf16(), 0, 0, SW_SHOWNORMAL); },
-	      { ShellExecuteA(0, 0, QString(url.toEncoded()).toLocal8Bit(), 0, 0, SW_SHOWNORMAL); });
+      QT_WA ({ ShellExecute (0, 0, (TCHAR *)QString (url.toEncoded ()).utf16 (), 0, 0, SW_SHOWNORMAL); },
+             { ShellExecuteA (0, 0, QString (url.toEncoded ()).toLocal8Bit (), 0, 0, SW_SHOWNORMAL); });
 #else
-  if (launch(url, QStringLiteral("firefox")))
-	    return;
-  if (launch(url, QStringLiteral("mozilla")))
-	    return;
-  if (launch(url, QStringLiteral("netscape")))
-	    return;
-  if (launch(url, QStringLiteral("opera")))
-	    return;
+      if (launch (url, QStringLiteral ("firefox"))) {
+        return;
+      }
+      if (launch (url, QStringLiteral ("mozilla"))) {
+        return;
+      }
+      if (launch (url, QStringLiteral ("netscape"))) {
+        return;
+      }
+      if (launch (url, QStringLiteral ("opera"))) {
+        return;
+      }
 #endif
     }
 
-    void on_action_AboutQt_triggered()
-    {
-  QMessageBox::aboutQt(this, QStringLiteral("About Qt"));
+    void on_action_AboutQt_triggered () {
+      QMessageBox::aboutQt (this, QStringLiteral ("About Qt"));
     }
 
     // *** Triggers of the DbList TreeView
-    
-    void on_treeDbList_clicked(const QModelIndex &index)
-    {
-	DbTable* dbt = dblist.getDbTable(index);
 
-	if (!dbt) return;
+    void on_treeDbList_clicked (const QModelIndex &index) {
+      DbTable *dbt = dblist.getDbTable (index);
 
-	if (datatablemodel) {
-	    delete datatablemodel;
-	}
+      if (!dbt) {
+        return;
+      }
 
-	datatablemodel = new QSqlTableModel(this, dbt->dbconn->db);
-	dataTable->setModel(datatablemodel);
+      if (datatablemodel) {
+        delete datatablemodel;
+      }
 
-	datatablemodel->setTable(dbt->tablename);
-	datatablemodel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+      datatablemodel = new QSqlTableModel (this, dbt->dbconn->db);
+      dataTable->setModel (datatablemodel);
 
-	datatablemodel->select();
-	datatablemodel_lastsort = -1;
+      datatablemodel->setTable (dbt->tablename);
+      datatablemodel->setEditStrategy (QSqlTableModel::OnManualSubmit);
 
-	dataTable->resizeColumnsToContents();
-	dataTable->resizeRowsToContents();
+      datatablemodel->select ();
+      datatablemodel_lastsort = -1;
 
-	schemamodel.setRecord(dbt, datatablemodel->record());
+      dataTable->resizeColumnsToContents ();
+      dataTable->resizeRowsToContents ();
+
+      schemamodel.setRecord (dbt, datatablemodel->record ());
     }
 
-    void on_treeDbList_expanded(const QModelIndex &index)
-    {
-	dblist.expanding(index);
+    void on_treeDbList_expanded (const QModelIndex &index) {
+      dblist.expanding (index);
     }
 
-    void on_treeDbList_collapsed(const QModelIndex &index)
-    {
-	dblist.collapsed(index);
+    void on_treeDbList_collapsed (const QModelIndex &index) {
+      dblist.collapsed (index);
     }
 
-    void show_treeDbList_contextMenu(const QPoint &position)
-    {
-	QMenu contextmenu(this);
-	
-	QModelIndex index = treeDbList->indexAt(position);
-	if (index.isValid())
-	{
-	    contextmenu.addAction(action_EditConnection);
-	    contextmenu.addAction(action_RemoveConnection);
-	    contextmenu.addSeparator();
-	}
+    void show_treeDbList_contextMenu (const QPoint &position) {
+      QMenu contextmenu (this);
 
-	contextmenu.addAction(action_AddConnection);
-	contextmenu.addAction(action_RefreshTablelist);
-	
-	contextmenu.exec(treeDbList->mapToGlobal(position));
+      QModelIndex index = treeDbList->indexAt (position);
+      if (index.isValid ()) {
+        contextmenu.addAction (action_EditConnection);
+        contextmenu.addAction (action_RemoveConnection);
+        contextmenu.addSeparator ();
+      }
+
+      contextmenu.addAction (action_AddConnection);
+      contextmenu.addAction (action_RefreshTablelist);
+
+      contextmenu.exec (treeDbList->mapToGlobal (position));
     }
 
     // *** Data Table Tab ***
 
-    void show_dataTable_contextMenu(const QPoint &position)
-    {
-	QMenu contextmenu(this);
-	
-	contextmenu.addAction(action_RevertData);
-	contextmenu.addAction(action_RefreshData);
-	contextmenu.addSeparator();
-	contextmenu.addAction(action_AddRow);
-	contextmenu.addAction(action_DelRow);
-	
-	contextmenu.exec(dataTable->mapToGlobal(position));
+    void show_dataTable_contextMenu (const QPoint &position) {
+      QMenu contextmenu (this);
+
+      contextmenu.addAction (action_RevertData);
+      contextmenu.addAction (action_RefreshData);
+      contextmenu.addSeparator ();
+      contextmenu.addAction (action_AddRow);
+      contextmenu.addAction (action_DelRow);
+
+      contextmenu.exec (dataTable->mapToGlobal (position));
     }
 
-    void on_action_AddRow_triggered()
-    {
-	if (!datatablemodel) return;
+    void on_action_AddRow_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	QModelIndex index = dataTable->currentIndex();
+      QModelIndex index = dataTable->currentIndex ();
 
-	int row = index.row() == -1 ? 0 : index.row();
-	datatablemodel->insertRow(row);
+      int row = index.row () == -1 ? 0 : index.row ();
+      datatablemodel->insertRow (row);
 
-	index = datatablemodel->index(row, 0);
-	dataTable->setCurrentIndex(index);
-	dataTable->edit(index);
+      index = datatablemodel->index (row, 0);
+      dataTable->setCurrentIndex (index);
+      dataTable->edit (index);
     }
 
-    void on_action_DelRow_triggered()
-    {
-	if (!datatablemodel) return;
+    void on_action_DelRow_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	QModelIndexList indexlist = dataTable->selectionModel()->selectedIndexes();
+      QModelIndexList indexlist = dataTable->selectionModel ()->selectedIndexes ();
 
-	for (int i = 0; i < indexlist.count(); ++i)
-	{
-	    datatablemodel->removeRow(indexlist.at(i).row());
-	}
+      for (int i = 0; i < indexlist.count (); ++i) {
+        datatablemodel->removeRow (indexlist.at (i).row ());
+      }
     }
 
-    void on_action_RefreshData_triggered()
-    {
-	if (!datatablemodel) return;
+    void on_action_RefreshData_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	datatablemodel->select();
+      datatablemodel->select ();
     }
 
-    void on_action_SaveData_triggered()
-    {
-	if (!datatablemodel) return;
+    void on_action_SaveData_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	datatablemodel->submitAll();
+      datatablemodel->submitAll ();
     }
 
-    void on_action_RevertData_triggered()
-    {
-	if (!datatablemodel) return;
+    void on_action_RevertData_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	datatablemodel->revertAll();
+      datatablemodel->revertAll ();
     }
 
-    void on_addRowButton_clicked()
-    {
-	on_action_AddRow_triggered();
+    void on_addRowButton_clicked () {
+      on_action_AddRow_triggered ();
     }
 
-    void on_delRowButton_clicked()
-    {
-	on_action_DelRow_triggered();
+    void on_delRowButton_clicked () {
+      on_action_DelRow_triggered ();
     }
 
-    void on_refreshDataButton_clicked()
-    {
-	on_action_RefreshData_triggered();
+    void on_refreshDataButton_clicked () {
+      on_action_RefreshData_triggered ();
     }
 
-    void on_saveDataButton_clicked()
-    {
-	on_action_SaveData_triggered();
+    void on_saveDataButton_clicked () {
+      on_action_SaveData_triggered ();
     }
 
-    void on_revertDataButton_clicked()
-    {
-	on_action_RevertData_triggered();
+    void on_revertDataButton_clicked () {
+      on_action_RevertData_triggered ();
     }
 
-    void slot_dataTable_horizontalHeader_sectionDoubleClicked(int logicalIndex)
-    {
-	if (!datatablemodel) return;
+    void slot_dataTable_horizontalHeader_sectionDoubleClicked (int logicalIndex) {
+      if (!datatablemodel) {
+        return;
+      }
 
-	Qt::SortOrder order = Qt::AscendingOrder;
+      Qt::SortOrder order = Qt::AscendingOrder;
 
-	if (logicalIndex == datatablemodel_lastsort) {
-	    order = Qt::DescendingOrder;
-	    datatablemodel_lastsort = -1;
-	}
-	else {
-	    datatablemodel_lastsort = logicalIndex;
-	}
+      if (logicalIndex == datatablemodel_lastsort) {
+        order = Qt::DescendingOrder;
+        datatablemodel_lastsort = -1;
+      }
+      else {
+        datatablemodel_lastsort = logicalIndex;
+      }
 
-	datatablemodel->sort(logicalIndex, order);
+      datatablemodel->sort (logicalIndex, order);
     }
 
-    static void save_to_clipboard(QSqlQuery query, const QItemSelection &sellist, QClipboard::Mode mode)
-    {
-	if (!query.isSelect() || !query.isActive()) {
-      qDebug() << QStringLiteral("bad query");
-	    return;
-	}
+    static void save_to_clipboard (QSqlQuery query, const QItemSelection &sellist, QClipboard::Mode mode) {
+      if (!query.isSelect () || !query.isActive ()) {
+        qDebug () << QStringLiteral ("bad query");
+        return;
+      }
 
-	QString seltext;
+      QString seltext;
 
-	Q_FOREACH(const QItemSelectionRange &selrange, sellist)
-	{
-	    if (!query.seek(selrange.top())) {
-    qDebug() << QStringLiteral("Could not seek in result");
-		continue;
-	    }
+      Q_FOREACH (const QItemSelectionRange &selrange, sellist) {
+        if (!query.seek (selrange.top ())) {
+          qDebug () << QStringLiteral ("Could not seek in result");
+          continue;
+        }
 
-	    for(int rowi = selrange.top(); rowi <= selrange.bottom(); ++rowi)
-	    {
-		for(int fi = selrange.left(); fi <= selrange.right(); ++fi)
-		{
-        if (fi != selrange.left()) seltext += QStringLiteral("\t");
-		    seltext += query.value(fi).toString();
-		}
-    seltext += QStringLiteral("\n");
-		query.next();
-	    }
-	}
+        for (int rowi = selrange.top (); rowi <= selrange.bottom (); ++rowi) {
+          for (int fi = selrange.left (); fi <= selrange.right (); ++fi) {
+            if (fi != selrange.left ()) {
+              seltext += QStringLiteral ("\t");
+            }
+            seltext += query.value (fi).toString ();
+          }
+          seltext += QStringLiteral ("\n");
+          query.next ();
+        }
+      }
 
-	QClipboard *clip = QApplication::clipboard();
-	clip->setText(seltext, mode);
+      QClipboard *clip = QApplication::clipboard ();
+      clip->setText (seltext, mode);
     }
 
-    void on_copyDataButton_clicked()
-    {
-	if (!datatablemodel) return;
+    void on_copyDataButton_clicked () {
+      if (!datatablemodel) {
+        return;
+      }
 
-	QItemSelectionModel *selmodel = dataTable->selectionModel();
-	const QItemSelection &sellist = selmodel->selection();
+      QItemSelectionModel *selmodel = dataTable->selectionModel ();
+      const QItemSelection &sellist = selmodel->selection ();
 
-	save_to_clipboard(datatablemodel->query(), sellist, QClipboard::Clipboard);
+      save_to_clipboard (datatablemodel->query (), sellist, QClipboard::Clipboard);
     }
 
     // *** Query Tab ***
 
-    void on_goQueryButton_clicked()
-    {
-	DbConnection *dbc = dblist.getDbConnection( treeDbList->currentIndex() );
+    void on_goQueryButton_clicked () {
+      DbConnection *dbc = dblist.getDbConnection (treeDbList->currentIndex () );
 
-	if (!dbc)
-	{
-	    queryTable->hide();
-	    queryResultText->show();
+      if (!dbc) {
+        queryTable->hide ();
+        queryResultText->show ();
 
-      queryResultText->setPlainText(QStringLiteral("No database connection selected.\nAdd and activate a connection in the left tree view."));
-	    return;
-	}
+        queryResultText->setPlainText (QStringLiteral ("No database connection selected.\nAdd and activate a connection in the left tree view."));
+        return;
+      }
 
-	if (!dbc->db.isOpen()) {
-	    QSqlError ce = dbc->connect(dblist);
-	    if (ce.isValid())
-	    {
-		queryTable->hide();
-		queryResultText->show();
+      if (!dbc->db.isOpen ()) {
+        QSqlError ce = dbc->connect (dblist);
+        if (ce.isValid ()) {
+          queryTable->hide ();
+          queryResultText->show ();
 
-    queryResultText->setPlainText(QString(QStringLiteral("%1\n%2"))
-					      .arg(ce.driverText())
-					      .arg(ce.databaseText()));
-		return;
-	    }
-	}
+          queryResultText->setPlainText (QString (QStringLiteral ("%1\n%2"))
+                                         .arg (ce.driverText ())
+                                         .arg (ce.databaseText ()));
+          return;
+        }
+      }
 
-	// initialize new sql query object
-	userquerymodel.setQuery(editQuery->toPlainText(), dbc->db);
+      // initialize new sql query object
+      userquerymodel.setQuery (editQuery->toPlainText (), dbc->db);
 
-	if (userquerymodel.lastError().isValid())
-	{
-	    queryTable->hide();
-	    queryResultText->show();
+      if (userquerymodel.lastError ().isValid ()) {
+        queryTable->hide ();
+        queryResultText->show ();
 
-      queryResultText->setPlainText(QString(QStringLiteral("%1\n%2"))
-					  .arg(userquerymodel.lastError().driverText())
-					  .arg(userquerymodel.lastError().databaseText()));
-	}
-	else
-	{
-	    // query was successful
+        queryResultText->setPlainText (QString (QStringLiteral ("%1\n%2"))
+                                       .arg (userquerymodel.lastError ().driverText ())
+                                       .arg (userquerymodel.lastError ().databaseText ()));
+      }
+      else{
+        // query was successful
 
-	    if (userquerymodel.query().isSelect())
-	    {
-		queryResultText->hide();
-		queryTable->show();
-		queryTable->resizeColumnsToContents();
-		queryTable->resizeRowsToContents();
-	    }
-	    else
-	    {
-		queryTable->hide();
-		queryResultText->show();
+        if (userquerymodel.query ().isSelect ()) {
+          queryResultText->hide ();
+          queryTable->show ();
+          queryTable->resizeColumnsToContents ();
+          queryTable->resizeRowsToContents ();
+        }
+        else{
+          queryTable->hide ();
+          queryResultText->show ();
 
-    queryResultText->setPlainText(QString(QStringLiteral("%1 rows affected."))
-					      .arg( userquerymodel.query().numRowsAffected() ));
-	    }
-	}
+          queryResultText->setPlainText (QString (QStringLiteral ("%1 rows affected."))
+                                         .arg (userquerymodel.query ().numRowsAffected () ));
+        }
+      }
     }
 
-    void on_copyQueryDataButton_clicked()
-    {
-	QItemSelectionModel *selmodel = queryTable->selectionModel();
-	const QItemSelection &sellist = selmodel->selection();
+    void on_copyQueryDataButton_clicked () {
+      QItemSelectionModel *selmodel = queryTable->selectionModel ();
+      const QItemSelection &sellist = selmodel->selection ();
 
-	save_to_clipboard(userquerymodel.query(), sellist, QClipboard::Clipboard);
+      save_to_clipboard (userquerymodel.query (), sellist, QClipboard::Clipboard);
     }
 
-    void on_clearQueryButton_clicked()
-    {
-	editQuery->clear();
+    void on_clearQueryButton_clicked () {
+      editQuery->clear ();
     }
 
-    void on_loadQueryButton_clicked()
-    {
-  QString filename = QFileDialog::getOpenFileName(this, QStringLiteral("Choose a SQL text file"),
-							QString(),
-              QStringLiteral("SQL text files (*.sql *.txt);;All Files (*.*)"));
+    void on_loadQueryButton_clicked () {
+      QString filename = QFileDialog::getOpenFileName (this, QStringLiteral ("Choose a SQL text file"),
+                                                       QString (),
+                                                       QStringLiteral ("SQL text files (*.sql *.txt);;All Files (*.*)"));
 
-	if (filename.isEmpty()) return;
+      if (filename.isEmpty ()) {
+        return;
+      }
 
-	QFile file(filename);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
-          QStringLiteral("Could not load sql query text file"));
-	    return;
-	}
+      QFile file (filename);
+      if (!file.open (QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
+                               QStringLiteral ("Could not load sql query text file"));
+        return;
+      }
 
-  editQuery->setPlainText( QString::fromLocal8Bit(file.readAll()) );
+      editQuery->setPlainText (QString::fromLocal8Bit (file.readAll ()) );
     }
 
-    void on_saveQueryButton_clicked()
-    {
-  QString filename = QFileDialog::getSaveFileName(this, QStringLiteral("Choose a SQL text file"),
-							QString(),
-              QStringLiteral("SQL text files (*.sql *.txt);;All Files (*.*)"));
-	
-	if (filename.isEmpty()) return;
+    void on_saveQueryButton_clicked () {
+      QString filename = QFileDialog::getSaveFileName (this, QStringLiteral ("Choose a SQL text file"),
+                                                       QString (),
+                                                       QStringLiteral ("SQL text files (*.sql *.txt);;All Files (*.*)"));
 
-	QFile file(filename);
-	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-      QMessageBox::critical(this, QStringLiteral("QtSqlView"),
-          QStringLiteral("Could not save sql query text file"));
-	    return;
-	}
+      if (filename.isEmpty ()) {
+        return;
+      }
 
-        QTextStream out(&file);
-  out << editQuery->toPlainText().toLocal8Bit();
+      QFile file (filename);
+      if (!file.open (QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
+                               QStringLiteral ("Could not save sql query text file"));
+        return;
+      }
+
+      QTextStream out (&file);
+      out << editQuery->toPlainText ().toLocal8Bit ();
     }
 };
 
