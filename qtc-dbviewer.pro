@@ -19,13 +19,17 @@ HEADERS += \
 TRANSLATIONS += \
     translation/QtcDbViewer_ru.ts
 
+RESOURCES += \
+    resources/resources.qrc
+
 OTHER_FILES += \
     LICENSE.md \
     README.md \
     uncrustify.cfg \
     dist/README.md \
     dist/make_dist.bat \
-    dist/make_dist.sh
+    dist/make_dist.sh \
+    resources/README.md
 
 PROVIDER = Gres
 
