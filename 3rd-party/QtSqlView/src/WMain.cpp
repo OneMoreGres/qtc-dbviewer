@@ -28,8 +28,8 @@ QSqlError DbConnection::connect (DbList &dblist) {
   assert (!dbuuid.isNull ());
 
   if (!QSqlDatabase::isDriverAvailable (dbparam.driver)) {
-    QSqlError e = QSqlError (QStringLiteral ("Could not connect to database"),
-                             QString (QStringLiteral ("Database driver %1 is not available.")).arg (dbparam.driver),
+    QSqlError e = QSqlError (tr ("Could not connect to database"),
+                             tr ("Database driver %1 is not available.").arg (dbparam.driver),
                              QSqlError::ConnectionError);
     dblist.tablelist_seterror (*this, e);
     return e;
@@ -46,13 +46,13 @@ QSqlError DbConnection::connect (DbList &dblist) {
 
   if (dbparam.askpassword) {
     bool ok;
-    QString passwd = QInputDialog::getText (NULL, QStringLiteral ("QtSqlView Password Prompt"),
-                                            QString (QStringLiteral ("Enter password for '%1':")).arg (dbparam.label),
+    QString passwd = QInputDialog::getText (NULL, tr ("QtSqlView Password Prompt"),
+                                            tr ("Enter password for '%1':").arg (dbparam.label),
                                             QLineEdit::Password, QString::null, &ok);
 
     if (!ok) {
-      QSqlError e = QSqlError (QStringLiteral ("Could not connect to database"),
-                               QStringLiteral ("Password prompt failed."),
+      QSqlError e = QSqlError (tr ("Could not connect to database"),
+                               tr ("Password prompt failed."),
                                QSqlError::ConnectionError);
       dblist.tablelist_seterror (*this, e);
       return e;

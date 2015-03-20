@@ -265,9 +265,9 @@ class DbList : public QAbstractItemModel {
         if (role == Qt::DisplayRole) {
           switch (section) {
             case 0:
-              return QStringLiteral ("Connections");
+              return tr ("Connections");
             default:
-              return QString (QStringLiteral ("Column %1")).arg (section);
+              return tr ("Column %1").arg (section);
           }
         }
         else{
@@ -279,7 +279,7 @@ class DbList : public QAbstractItemModel {
           return QVariant ();
         }
 
-        return QString (QStringLiteral ("Row %1")).arg (section);
+        return tr ("Row %1").arg (section);
       }
     }
 
@@ -325,7 +325,7 @@ class DbList : public QAbstractItemModel {
       if (const DbConnection *dbc = qobject_cast<const DbConnection *>(obj)) {
         if (role == Qt::DisplayRole) {
           if (dbc->dbparam.label.isEmpty ()) {
-            return QStringLiteral ("<no label>");
+            return tr ("<no label>");
           }
 
           return dbc->dbparam.label;
@@ -604,17 +604,17 @@ class DbSchemaModel : public QAbstractTableModel {
         if (role == Qt::DisplayRole) {
           switch (section) {
             case 0:
-              return QStringLiteral ("Connections");
+              return tr ("Name");
             case 1:
-              return QStringLiteral ("Type");
+              return tr ("Type");
             case 2:
-              return QStringLiteral ("Length");
+              return tr ("Length");
             case 3:
-              return QStringLiteral ("Modifiers");
+              return tr ("Modifiers");
             case 4:
-              return QStringLiteral ("Default");
+              return tr ("Default");
             default:
-              return QString (QStringLiteral ("Column %1")).arg (section);
+              return tr ("Column %1").arg (section);
           }
         }
       }
@@ -653,27 +653,27 @@ class DbSchemaModel : public QAbstractTableModel {
               QString mods = QStringLiteral ("");
 
               if (pindex.indexOf (field.name ()) >= 0) {
-                mods += QStringLiteral ("PRIMARY KEY");
+                mods += tr ("PRIMARY KEY");
               }
 
               if (field.requiredStatus () == QSqlField::Required) {
                 if (!mods.isEmpty ()) {
                   mods += QStringLiteral (" ");
                 }
-                mods += QStringLiteral ("NOT NULL");
+                mods += tr ("NOT NULL");
               }
               else if (field.requiredStatus () == QSqlField::Optional) {
                 if (!mods.isEmpty ()) {
                   mods += QStringLiteral (" ");
                 }
-                mods += QStringLiteral ("NULL");
+                mods += tr ("NULL");
               }
 
               if (field.isAutoValue ()) {
                 if (!mods.isEmpty ()) {
                   mods += QStringLiteral (" ");
                 }
-                mods += QStringLiteral ("AUTO_INCREMENT");
+                mods += tr ("AUTO_INCREMENT");
               }
 
               return mods;

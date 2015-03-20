@@ -99,8 +99,8 @@ class WMain : public QMainWindow, public Ui::WMain {
       int selectednum = dblist.getDbConnectionNum (selected);
 
       if (selectednum < 0) {
-        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
-                               QStringLiteral ("No database connection selected. Click on one of the entries in the database list."));
+        QMessageBox::critical (this, tr ("QtSqlView"),
+                               tr ("No database connection selected. Click on one of the entries in the database list."));
       }
       else{
         WConnection wc (this, &dblist.list[selectednum]->dbparam);
@@ -117,8 +117,8 @@ class WMain : public QMainWindow, public Ui::WMain {
       int selectednum = dblist.getDbConnectionNum (selected);
 
       if (selectednum < 0) {
-        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
-                               QStringLiteral ("No database connection selected. Click on one of the entries in the database list."));
+        QMessageBox::critical (this, tr ("QtSqlView"),
+                               tr ("No database connection selected. Click on one of the entries in the database list."));
       }
       else{
         dblist.delDbConnection (selectednum);
@@ -332,7 +332,7 @@ class WMain : public QMainWindow, public Ui::WMain {
 
     static void save_to_clipboard (QSqlQuery query, const QItemSelection &sellist, QClipboard::Mode mode) {
       if (!query.isSelect () || !query.isActive ()) {
-        qDebug () << QStringLiteral ("bad query");
+        qDebug () << tr ("bad query");
         return;
       }
 
@@ -340,7 +340,7 @@ class WMain : public QMainWindow, public Ui::WMain {
 
       Q_FOREACH (const QItemSelectionRange &selrange, sellist) {
         if (!query.seek (selrange.top ())) {
-          qDebug () << QStringLiteral ("Could not seek in result");
+          qDebug () << tr ("Could not seek in result");
           continue;
         }
 
@@ -380,7 +380,7 @@ class WMain : public QMainWindow, public Ui::WMain {
         queryTable->hide ();
         queryResultText->show ();
 
-        queryResultText->setPlainText (QStringLiteral ("No database connection selected.\nAdd and activate a connection in the left tree view."));
+        queryResultText->setPlainText (tr ("No database connection selected.\nAdd and activate a connection in the left tree view."));
         return;
       }
 
@@ -421,7 +421,7 @@ class WMain : public QMainWindow, public Ui::WMain {
           queryTable->hide ();
           queryResultText->show ();
 
-          queryResultText->setPlainText (QString (QStringLiteral ("%1 rows affected."))
+          queryResultText->setPlainText (tr ("%1 rows affected.")
                                          .arg (userquerymodel.query ().numRowsAffected () ));
         }
       }
@@ -439,9 +439,9 @@ class WMain : public QMainWindow, public Ui::WMain {
     }
 
     void on_loadQueryButton_clicked () {
-      QString filename = QFileDialog::getOpenFileName (this, QStringLiteral ("Choose a SQL text file"),
+      QString filename = QFileDialog::getOpenFileName (this, tr ("Choose a SQL text file"),
                                                        QString (),
-                                                       QStringLiteral ("SQL text files (*.sql *.txt);;All Files (*.*)"));
+                                                       tr ("SQL text files (*.sql *.txt);;All Files (*.*)"));
 
       if (filename.isEmpty ()) {
         return;
@@ -449,8 +449,8 @@ class WMain : public QMainWindow, public Ui::WMain {
 
       QFile file (filename);
       if (!file.open (QIODevice::ReadOnly | QIODevice::Text)) {
-        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
-                               QStringLiteral ("Could not load sql query text file"));
+        QMessageBox::critical (this, tr ("QtSqlView"),
+                               tr ("Could not load sql query text file"));
         return;
       }
 
@@ -458,9 +458,9 @@ class WMain : public QMainWindow, public Ui::WMain {
     }
 
     void on_saveQueryButton_clicked () {
-      QString filename = QFileDialog::getSaveFileName (this, QStringLiteral ("Choose a SQL text file"),
+      QString filename = QFileDialog::getSaveFileName (this, tr ("Choose a SQL text file"),
                                                        QString (),
-                                                       QStringLiteral ("SQL text files (*.sql *.txt);;All Files (*.*)"));
+                                                       tr ("SQL text files (*.sql *.txt);;All Files (*.*)"));
 
       if (filename.isEmpty ()) {
         return;
@@ -468,8 +468,8 @@ class WMain : public QMainWindow, public Ui::WMain {
 
       QFile file (filename);
       if (!file.open (QIODevice::WriteOnly | QIODevice::Text)) {
-        QMessageBox::critical (this, QStringLiteral ("QtSqlView"),
-                               QStringLiteral ("Could not save sql query text file"));
+        QMessageBox::critical (this, tr ("QtSqlView"),
+                               tr ("Could not save sql query text file"));
         return;
       }
 

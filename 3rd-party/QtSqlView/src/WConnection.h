@@ -126,7 +126,7 @@ class WConnection : public QDialog, private Ui::WConnection {
         editUsername->setEnabled (false);
         editPassword->setEnabled (false);
         checkAskPassword->setEnabled (false);
-        labelDatabase->setText (QStringLiteral ("Filename"));
+        labelDatabase->setText (tr ("Filename"));
         buttonSelectFile->setEnabled (true);
       }
       else if (drv == QStringLiteral ("QMYSQL") || drv == QStringLiteral ("QMYSQL3")) {
@@ -135,7 +135,7 @@ class WConnection : public QDialog, private Ui::WConnection {
         editUsername->setEnabled (true);
         checkAskPassword->setEnabled (true);
         updatePasswordStatus ();
-        labelDatabase->setText (QStringLiteral ("Database"));
+        labelDatabase->setText (tr ("Database"));
         buttonSelectFile->setEnabled (false);
       }
       else if (drv == QStringLiteral ("QPSQL") || drv == QStringLiteral ("QPSQL7")) {
@@ -144,7 +144,7 @@ class WConnection : public QDialog, private Ui::WConnection {
         editUsername->setEnabled (true);
         checkAskPassword->setEnabled (true);
         updatePasswordStatus ();
-        labelDatabase->setText (QStringLiteral ("Database"));
+        labelDatabase->setText (tr ("Database"));
         buttonSelectFile->setEnabled (false);
       }
       else{
@@ -153,7 +153,7 @@ class WConnection : public QDialog, private Ui::WConnection {
         editUsername->setEnabled (true);
         checkAskPassword->setEnabled (true);
         updatePasswordStatus ();
-        labelDatabase->setText (QStringLiteral ("Database"));
+        labelDatabase->setText (tr ("Database"));
         buttonSelectFile->setEnabled (false);
       }
     }
@@ -174,14 +174,14 @@ class WConnection : public QDialog, private Ui::WConnection {
       QSqlError ce = conn.connect (dblist);
 
       if (ce.isValid ()) {
-        QMessageBox::critical (this, QStringLiteral ("Testing Connection"),
-                               QString (QStringLiteral ("Connection failed:\n%1\n%2"))
+        QMessageBox::critical (this, tr ("Testing Connection"),
+                               QString (tr ("Connection failed:\n%1\n%2"))
                                .arg (ce.driverText ())
                                .arg (ce.databaseText ()));
       }
       else{
-        QMessageBox::information (this, QStringLiteral ("Testing Connection"),
-                                  QString (QStringLiteral ("Connection established successfully.")));
+        QMessageBox::information (this, tr ("Testing Connection"),
+                                  QString (tr ("Connection established successfully.")));
       }
     }
 
@@ -195,9 +195,9 @@ class WConnection : public QDialog, private Ui::WConnection {
     }
 
     void on_buttonSelectFile_clicked () {
-      QString filename = QFileDialog::getOpenFileName (this, QStringLiteral ("Choose a SQLite database file"),
+      QString filename = QFileDialog::getOpenFileName (this, tr ("Choose a SQLite database file"),
                                                        QString (),
-                                                       QStringLiteral ("SQLite databases (*.db *.sqlite);;All Files (*.*)"));
+                                                       tr ("SQLite databases (*.db *.sqlite);;All Files (*.*)"));
 
       if (filename.isEmpty ()) {
         return;

@@ -7,6 +7,8 @@
 #ifndef _DbTypes_H_
 #define _DbTypes_H_
 
+#include <QObject>
+
 class DbTypes {
   public:
     static inline QString getName (QString driver, int t) {
@@ -20,7 +22,7 @@ class DbTypes {
         return getNameSQLITE (t);
       }
 
-      return QString (QStringLiteral ("Type %1")).arg (t);
+      return QObject::tr ("Type %1").arg (t);
     }
 
   protected:
@@ -33,7 +35,7 @@ class DbTypes {
         case 5:   return QStringLiteral ("null");
 
         default:
-          return QString (QStringLiteral ("Type %1")).arg (t);
+          return QObject::tr ("Type %1").arg (t);
       }
     }
 
@@ -64,7 +66,7 @@ class DbTypes {
         case 254: return QStringLiteral ("char");
 
         default:
-          return QString (QStringLiteral ("Type %1")).arg (t);
+          return QObject::tr ("Type %1").arg (t);
       }
     }
 
@@ -190,7 +192,7 @@ class DbTypes {
         case 2283:  return QStringLiteral ("anyelement");
 
         default:
-          return QString (QStringLiteral ("Type %1")).arg (t);
+          return QObject::tr ("Type %1").arg (t);
       }
     }
 };

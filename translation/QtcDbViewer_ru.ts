@@ -2,9 +2,129 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>DbConnection</name>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="31"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="54"/>
+        <source>Could not connect to database</source>
+        <translation>Ошибка подключения к БД</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="32"/>
+        <source>Database driver %1 is not available.</source>
+        <translation>Драйвер %1 не доступен.</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="49"/>
+        <source>QtSqlView Password Prompt</source>
+        <translation>Запрос пароля</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="50"/>
+        <source>Enter password for &apos;%1&apos;:</source>
+        <translation>Введите пароль для &apos;%1&apos;:</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.cpp" line="55"/>
+        <source>Password prompt failed.</source>
+        <translation>Ошибка ввода пароля.</translation>
+    </message>
+</context>
+<context>
+    <name>DbList</name>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="268"/>
+        <source>Connections</source>
+        <translation>Соединения</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="270"/>
+        <source>Column %1</source>
+        <translation>Столбец %1</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="282"/>
+        <source>Row %1</source>
+        <translation>Строка %1</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="328"/>
+        <source>&lt;no label&gt;</source>
+        <translation>&lt;без названия&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>DbSchemaModel</name>
+    <message>
+        <source>Connections</source>
+        <translation type="obsolete">Соединения</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="607"/>
+        <source>Name</source>
+        <translation>Имя</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="609"/>
+        <source>Type</source>
+        <translation>Тип</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="611"/>
+        <source>Length</source>
+        <translation>Длина</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="613"/>
+        <source>Modifiers</source>
+        <translation>Модификаторы</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="615"/>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="617"/>
+        <source>Column %1</source>
+        <translation>Столбец %1</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="656"/>
+        <source>PRIMARY KEY</source>
+        <translation>PRIMARY KEY</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="663"/>
+        <source>NOT NULL</source>
+        <translation>NOT NULL</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="669"/>
+        <source>NULL</source>
+        <translation>NULL</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="676"/>
+        <source>AUTO_INCREMENT</source>
+        <translation>AUTO_INCREMENT</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/DbTypes.h" line="25"/>
+        <location filename="../3rd-party/QtSqlView/src/DbTypes.h" line="38"/>
+        <location filename="../3rd-party/QtSqlView/src/DbTypes.h" line="69"/>
+        <location filename="../3rd-party/QtSqlView/src/DbTypes.h" line="195"/>
+        <source>Type %1</source>
+        <translation>Тип %1</translation>
+    </message>
+</context>
+<context>
     <name>QtcDbViewer::Internal::QtcDbViewerPlugin</name>
     <message>
-        <location filename="../src/QtcDbViewerPlugin.cpp" line="39"/>
+        <location filename="../src/QtcDbViewerPlugin.cpp" line="41"/>
         <source>Db Viewer</source>
         <translation>Просмотр БД</translation>
     </message>
@@ -24,6 +144,9 @@
     </message>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WConnection.ui" line="56"/>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="138"/>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="147"/>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="156"/>
         <source>Database</source>
         <translation>База данных</translation>
     </message>
@@ -87,11 +210,50 @@
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="129"/>
+        <source>Filename</source>
+        <translation>Имя файла</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="177"/>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="183"/>
+        <source>Testing Connection</source>
+        <translation>Проверка соединения</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="178"/>
+        <source>Connection failed:
+%1
+%2</source>
+        <translation>Ошибка соединения:
+%1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="184"/>
+        <source>Connection established successfully.</source>
+        <translation>Соединение успешно установлено.</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="198"/>
+        <source>Choose a SQLite database file</source>
+        <translation>Выберите файл базы SQLite</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WConnection.h" line="200"/>
+        <source>SQLite databases (*.db *.sqlite);;All Files (*.*)</source>
+        <translation>Базы SQLite (*.db *.sqlite);;Все файлы (*.*)</translation>
+    </message>
 </context>
 <context>
     <name>WMain</name>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="16"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="102"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="120"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="452"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="471"/>
         <source>QtSqlView</source>
         <translation>QtSqlView</translation>
     </message>
@@ -247,6 +409,55 @@
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="517"/>
         <source>Visit Website</source>
         <translation>Сайт программы</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="103"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="121"/>
+        <source>No database connection selected. Click on one of the entries in the database list.</source>
+        <translation>Нет выделенного соединения. Выберите одно из списка.</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="335"/>
+        <source>bad query</source>
+        <translation>Неверный запрос</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="343"/>
+        <source>Could not seek in result</source>
+        <translation>Ошибка поиска</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="383"/>
+        <source>No database connection selected.
+Add and activate a connection in the left tree view.</source>
+        <translation>Нет выделенного соединения. Выберите одно из списка слева.</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="424"/>
+        <source>%1 rows affected.</source>
+        <translation>%1 строк обработано.</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="442"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="461"/>
+        <source>Choose a SQL text file</source>
+        <translation>Выберите файл с SQL запросом</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="444"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="463"/>
+        <source>SQL text files (*.sql *.txt);;All Files (*.*)</source>
+        <translation>Файлы SQL запросов (*.sql *.txt);;Все файлы (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="453"/>
+        <source>Could not load sql query text file</source>
+        <translation>Не удалось загрузить файл с запросом</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="472"/>
+        <source>Could not save sql query text file</source>
+        <translation>Не удалось сохранить файл с запросом</translation>
     </message>
 </context>
 </TS>
