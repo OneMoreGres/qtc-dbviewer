@@ -28,6 +28,8 @@
 
 #include "DbTypes.h"
 
+#include <coreplugin/icore.h>
+
 struct DbParameter {
   QString label;
   QString hostname;
@@ -218,7 +220,8 @@ class DbList : public QAbstractItemModel {
 
     /// save all database parameters to settings
     void saveToSettings () {
-      QSettings settings (QStringLiteral ("idlebox.net"), QStringLiteral ("QtSqlView"));
+      Q_ASSERT (Core::ICore::settings () != NULL);
+      QSettings &settings = *(Core::ICore::settings ());
 
       settings.beginWriteArray (QStringLiteral ("connections"));
       int i = 0;
@@ -232,7 +235,8 @@ class DbList : public QAbstractItemModel {
 
     /// load all database parameters from settings
     void loadFromSettings () {
-      QSettings settings (QStringLiteral ("idlebox.net"), QStringLiteral ("QtSqlView"));
+      Q_ASSERT (Core::ICore::settings () != NULL);
+      QSettings &settings = *(Core::ICore::settings ());
 
       clear ();
 
