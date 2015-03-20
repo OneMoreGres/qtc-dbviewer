@@ -197,7 +197,7 @@ class WConnection : public QDialog, private Ui::WConnection {
     void on_buttonSelectFile_clicked () {
       QString filename = QFileDialog::getOpenFileName (this, QStringLiteral ("Choose a SQLite database file"),
                                                        QString (),
-                                                       QStringLiteral ("SQLite databases (*.db);;All Files (*.*)"));
+                                                       QStringLiteral ("SQLite databases (*.db *.sqlite);;All Files (*.*)"));
 
       if (filename.isEmpty ()) {
         return;
