@@ -43,6 +43,9 @@ class WMain : public QMainWindow, public Ui::WMain {
       dblist.loadFromSettings ();
 
       treeDbList->setModel (&dblist);
+      if (dblist.rowCount (QModelIndex ()) > 0) {
+        treeDbList->setCurrentIndex (dblist.index (0,0));
+      }
 
       treeDbList->setContextMenuPolicy (Qt::CustomContextMenu);
       connect (treeDbList, SIGNAL (customContextMenuRequested (const QPoint &)),
