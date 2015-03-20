@@ -71,7 +71,7 @@ class WMain : public QMainWindow, public Ui::WMain {
 
     DbList dblist;
 
-    virtual void closeEvent (QCloseEvent *) {
+    ~WMain () {
       dblist.saveToSettings ();
     }
 
