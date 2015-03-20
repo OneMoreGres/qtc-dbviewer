@@ -31,6 +31,8 @@ OTHER_FILES += \
     dist/make_dist.sh \
     resources/README.md
 
+OTHER_FILES += $$TRANSLATIONS
+
 PROVIDER = Gres
 
 ###### If the plugin can be depended upon by other plugins, this code needs to be outsourced to
