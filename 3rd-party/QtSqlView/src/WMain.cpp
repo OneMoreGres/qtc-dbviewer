@@ -33,7 +33,7 @@ QSqlError DbConnection::connect (DbList &dblist) {
   db.setDatabaseName (dbparam.database);
   db.setUserName (dbparam.username);
 
-  if (dbparam.askpassword) {
+  if (dbparam.askpassword && dbparam.password.isEmpty ()) {
     bool ok;
     QString passwd = QInputDialog::getText (NULL, tr ("QtSqlView Password Prompt"),
                                             tr ("Enter password for '%1':").arg (dbparam.label),
@@ -46,10 +46,9 @@ QSqlError DbConnection::connect (DbList &dblist) {
       dblist.tablelist_seterror (*this, e);
       return e;
     }
+    dbparam.password = passwd;
   }
-  else {
-    db.setPassword (dbparam.password);
-  }
+  db.setPassword (dbparam.password);
 
   if (!db.open ()) {
     QSqlError e = db.lastError ();

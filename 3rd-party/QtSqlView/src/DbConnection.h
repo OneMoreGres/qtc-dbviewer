@@ -47,7 +47,9 @@ struct DbParameter {
     settings.setValue (QStringLiteral ("port"), port);
     settings.setValue (QStringLiteral ("driver"), driver);
     settings.setValue (QStringLiteral ("username"), username);
-    settings.setValue (QStringLiteral ("password"), password);
+    if (!askpassword) {
+      settings.setValue (QStringLiteral ("password"), password);
+    }
     settings.setValue (QStringLiteral ("askpassword"), askpassword);
     settings.setValue (QStringLiteral ("database"), database);
     settings.setValue (QStringLiteral ("showsystables"), showsystables);
