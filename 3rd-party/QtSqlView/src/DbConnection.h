@@ -539,16 +539,23 @@ class DbList : public QAbstractItemModel {
 
       QVector<DbTable *> newtablelist;
 
-      Q_FOREACH (QString table, dbc.db.tables ()) {
+      QStringList tables;
+      tables = dbc.db.tables ();
+      tables.sort (Qt::CaseInsensitive);
+      Q_FOREACH (QString table, tables) {
         newtablelist.push_back (new DbTable (&dbc, table, 0) );
       }
 
+      tables = dbc.db.tables (QSql::Views);
+      tables.sort (Qt::CaseInsensitive);
       Q_FOREACH (QString table, dbc.db.tables (QSql::Views)) {
         newtablelist.push_back (new DbTable (&dbc, table, 1) );
       }
 
       if (dbc.dbparam.showsystables) {
-        Q_FOREACH (QString table, dbc.db.tables (QSql::SystemTables)) {
+        tables = dbc.db.tables (QSql::SystemTables);
+        tables.sort (Qt::CaseInsensitive);
+        Q_FOREACH (QString table, tables) {
           newtablelist.push_back (new DbTable (&dbc, table, 2) );
         }
       }
