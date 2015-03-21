@@ -17,6 +17,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QProcess>
 #include <QtCore/QUrl>
+#include <QStyledItemDelegate>
 
 #include "ui_WMain.h"
 
@@ -28,6 +29,23 @@
 #  include <shlobj.h>
 #  include <intshcut.h>
 #endif
+
+class SqlFieldDelegate : public QStyledItemDelegate {
+  Q_OBJECT
+
+  public:
+    QString displayText (const QVariant &value, const QLocale & /*locale*/) const {
+      if (value.type () != QVariant::ByteArray) {
+        return value.toString ();
+      }
+      QString stringed = value.toString ();
+      QByteArray raw = value.toByteArray ();
+      if (stringed.size () == raw.size ()) {
+        return stringed;
+      }
+      return tr ("Binary [size %1]").arg (raw.size ());
+    }
+};
 
 class WMain : public QMainWindow, public Ui::WMain {
   Q_OBJECT
@@ -51,6 +69,7 @@ class WMain : public QMainWindow, public Ui::WMain {
       connect (treeDbList, SIGNAL (customContextMenuRequested (const QPoint &)),
                this, SLOT (show_treeDbList_contextMenu (const QPoint &)));
 
+      dataTable->setItemDelegate (new SqlFieldDelegate);
       dataTable->setContextMenuPolicy (Qt::CustomContextMenu);
       connect (dataTable, SIGNAL (customContextMenuRequested (const QPoint &)),
                this, SLOT (show_dataTable_contextMenu (const QPoint &)));
@@ -61,6 +80,7 @@ class WMain : public QMainWindow, public Ui::WMain {
       schemaTable->setModel (&schemamodel);
       schemaTable->verticalHeader ()->hide ();
 
+      queryTable->setItemDelegate (new SqlFieldDelegate);
       queryTable->hide ();
       queryTable->setModel (&userquerymodel);
 

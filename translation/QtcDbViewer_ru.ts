@@ -130,6 +130,14 @@
     </message>
 </context>
 <context>
+    <name>SqlFieldDelegate</name>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="46"/>
+        <source>Binary [size %1]</source>
+        <translation>БЛОБ [%1 байт]</translation>
+    </message>
+</context>
+<context>
     <name>WConnection</name>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WConnection.ui" line="14"/>
