@@ -656,7 +656,7 @@ class DbSchemaModel : public QAbstractTableModel {
             return field.name ();
 
           case 1:
-            return DbTypes::getName (driver, field.typeID ());
+            return QLatin1String (QVariant::typeToName (field.type ()));
 
           case 2:
             return field.length ();
