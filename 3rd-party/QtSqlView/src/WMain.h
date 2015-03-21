@@ -200,9 +200,6 @@ class WMain : public QMainWindow, public Ui::WMain {
       datatablemodel->select ();
       datatablemodel_lastsort = -1;
 
-      dataTable->resizeColumnsToContents ();
-      dataTable->resizeRowsToContents ();
-
       schemamodel.setRecord (dbt, datatablemodel->record ());
     }
 
@@ -417,8 +414,6 @@ class WMain : public QMainWindow, public Ui::WMain {
         if (userquerymodel.query ().isSelect ()) {
           queryResultText->hide ();
           queryTable->show ();
-          queryTable->resizeColumnsToContents ();
-          queryTable->resizeRowsToContents ();
         }
         else{
           queryTable->hide ();
