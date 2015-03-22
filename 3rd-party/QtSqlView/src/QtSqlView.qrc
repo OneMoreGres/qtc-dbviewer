@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/" >
+    <qresource prefix="/">
         <file>img/addrow.png</file>
         <file>img/conn.png</file>
         <file>img/copyedit.png</file>
@@ -22,5 +22,7 @@
         <file>img/trash.png</file>
         <file>img/view.png</file>
         <file>img/world.png</file>
+        <file>img/download.png</file>
+        <file>img/upload.png</file>
     </qresource>
 </RCC>

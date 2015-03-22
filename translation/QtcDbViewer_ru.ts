@@ -33,22 +33,22 @@
 <context>
     <name>DbList</name>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="275"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="273"/>
         <source>Connections</source>
         <translation>Соединения</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="277"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="275"/>
         <source>Column %1</source>
         <translation>Столбец %1</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="289"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="287"/>
         <source>Row %1</source>
         <translation>Строка %1</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="335"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="333"/>
         <source>&lt;no label&gt;</source>
         <translation>&lt;без названия&gt;</translation>
     </message>
@@ -60,52 +60,52 @@
         <translation type="obsolete">Соединения</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="621"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="619"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="623"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="621"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="625"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="623"/>
         <source>Length</source>
         <translation>Длина</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="627"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="625"/>
         <source>Modifiers</source>
         <translation>Модификаторы</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="629"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="627"/>
         <source>Default</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="631"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="629"/>
         <source>Column %1</source>
         <translation>Столбец %1</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="670"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="668"/>
         <source>PRIMARY KEY</source>
         <translation>PRIMARY KEY</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="677"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="675"/>
         <source>NOT NULL</source>
         <translation>NOT NULL</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="683"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="681"/>
         <source>NULL</source>
         <translation>NULL</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="690"/>
+        <location filename="../3rd-party/QtSqlView/src/DbConnection.h" line="688"/>
         <source>AUTO_INCREMENT</source>
         <translation>AUTO_INCREMENT</translation>
     </message>
@@ -263,10 +263,13 @@
     <name>WMain</name>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="15"/>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="107"/>
         <location filename="../3rd-party/QtSqlView/src/WMain.h" line="125"/>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="469"/>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="488"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="143"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="291"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="319"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="325"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="536"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="555"/>
         <source>QtSqlView</source>
         <translation>QtSqlView</translation>
     </message>
@@ -308,6 +311,11 @@
         <translation>Обновить</translation>
     </message>
     <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="180"/>
+        <source>F5</source>
+        <translation>F5</translation>
+    </message>
+    <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="187"/>
         <source>Write Changes</source>
         <translation>Применить изменения</translation>
@@ -342,10 +350,25 @@
         <translation>Выполнить запрос</translation>
     </message>
     <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="338"/>
+        <source>Ctrl+R</source>
+        <translation>Ctrl+R</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="355"/>
+        <source>Ctrl+C</source>
+        <translation>Ctrl+C</translation>
+    </message>
+    <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="375"/>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="378"/>
         <source>Clear Query</source>
         <translation>Очистить запрос</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="385"/>
+        <source>Ctrl+W</source>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="392"/>
@@ -358,10 +381,20 @@
         <translation>Загрузить запрос</translation>
     </message>
     <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="402"/>
+        <source>Ctrl+O</source>
+        <translation>Ctrl+O</translation>
+    </message>
+    <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="409"/>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="412"/>
         <source>Save Query to Text File</source>
         <translation>Сохранить запрос в файл</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="419"/>
+        <source>Ctrl+S</source>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="492"/>
@@ -424,51 +457,90 @@
         <translation>Сайт программы</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="108"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="633"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="636"/>
+        <source>Download raw</source>
+        <translation>Выгрузить</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="645"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.ui" line="648"/>
+        <source>Upload Raw</source>
+        <translation>Загрузить</translation>
+    </message>
+    <message>
         <location filename="../3rd-party/QtSqlView/src/WMain.h" line="126"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="144"/>
         <source>No database connection selected. Click on one of the entries in the database list.</source>
         <translation>Нет выделенного соединения. Выберите одно из списка.</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="352"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="281"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="309"/>
+        <source>Choose a raw data file</source>
+        <translation>Выберите файл с данными</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="283"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="311"/>
+        <source>All Files (*.*)</source>
+        <translation>Все файлы (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="291"/>
+        <source>Could not save raw data file</source>
+        <translation>Не удалось сохранить файл с данными</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="319"/>
+        <source>Could not load raw data file</source>
+        <translation>Не удалось прочитать файл с данными</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="325"/>
+        <source>Failed to set loaded raw data</source>
+        <translation>Не удалось задать указанные данные</translation>
+    </message>
+    <message>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="421"/>
         <source>bad query</source>
         <translation>Неверный запрос</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="360"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="429"/>
         <source>Could not seek in result</source>
         <translation>Ошибка поиска</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="400"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="469"/>
         <source>No database connection selected.
 Add and activate a connection in the left tree view.</source>
         <translation>Нет выделенного соединения. Выберите одно из списка слева.</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="441"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="508"/>
         <source>%1 rows affected.</source>
         <translation>%1 строк обработано.</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="459"/>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="478"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="526"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="545"/>
         <source>Choose a SQL text file</source>
         <translation>Выберите файл с SQL запросом</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="461"/>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="480"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="528"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="547"/>
         <source>SQL text files (*.sql *.txt);;All Files (*.*)</source>
         <translation>Файлы SQL запросов (*.sql *.txt);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="470"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="537"/>
         <source>Could not load sql query text file</source>
         <translation>Не удалось загрузить файл с запросом</translation>
     </message>
     <message>
-        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="489"/>
+        <location filename="../3rd-party/QtSqlView/src/WMain.h" line="556"/>
         <source>Could not save sql query text file</source>
         <translation>Не удалось сохранить файл с запросом</translation>
     </message>

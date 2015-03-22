@@ -257,9 +257,75 @@ class WMain : public QMainWindow, public Ui::WMain {
       contextmenu.addSeparator ();
       contextmenu.addAction (action_AddRow);
       contextmenu.addAction (action_DelRow);
+      contextmenu.addSeparator ();
+      contextmenu.addAction (action_DownloadRaw);
+      contextmenu.addAction (action_UploadRaw);
+      QModelIndex index = dataTable->indexAt (position);
+      bool isRaw = (index.isValid () && index.data ().type () == QVariant::ByteArray);
+      action_DownloadRaw->setEnabled (isRaw);
+      action_UploadRaw->setEnabled (isRaw);
 
       contextmenu.exec (dataTable->mapToGlobal (position));
     }
+
+
+    void on_action_DownloadRaw_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
+      QModelIndex index = dataTable->currentIndex ();
+      if (!index.isValid ()) {
+        return;
+      }
+
+      QString filename = QFileDialog::getSaveFileName (this, tr ("Choose a raw data file"),
+                                                       QString (),
+                                                       tr ("All Files (*.*)"));
+
+      if (filename.isEmpty ()) {
+        return;
+      }
+
+      QFile file (filename);
+      if (!file.open (QIODevice::WriteOnly)) {
+        QMessageBox::critical (this, tr ("QtSqlView"), tr ("Could not save raw data file"));
+        return;
+      }
+
+      QByteArray data = index.data ().toByteArray ();
+      file.write (data);
+    }
+
+
+    void on_action_UploadRaw_triggered () {
+      if (!datatablemodel) {
+        return;
+      }
+      QModelIndex index = dataTable->currentIndex ();
+      if (!index.isValid ()) {
+        return;
+      }
+
+      QString filename = QFileDialog::getOpenFileName (this, tr ("Choose a raw data file"),
+                                                       QString (),
+                                                       tr ("All Files (*.*)"));
+
+      if (filename.isEmpty ()) {
+        return;
+      }
+
+      QFile file (filename);
+      if (!file.open (QIODevice::ReadOnly)) {
+        QMessageBox::critical (this, tr ("QtSqlView"), tr ("Could not load raw data file"));
+        return;
+      }
+
+      QByteArray data = file.readAll ();
+      if (!datatablemodel->setData (index, data)) {
+        QMessageBox::critical (this, tr ("QtSqlView"), tr ("Failed to set loaded raw data"));
+      }
+    }
+
 
     void on_action_AddRow_triggered () {
       if (!datatablemodel) {

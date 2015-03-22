@@ -624,6 +624,30 @@
     <string>Visit Website</string>
    </property>
   </action>
+  <action name="action_DownloadRaw">
+   <property name="icon">
+    <iconset resource="QtSqlView.qrc">
+     <normaloff>:/img/download.png</normaloff>:/img/download.png</iconset>
+   </property>
+   <property name="text">
+    <string>Download raw</string>
+   </property>
+   <property name="toolTip">
+    <string>Download raw</string>
+   </property>
+  </action>
+  <action name="action_UploadRaw">
+   <property name="icon">
+    <iconset resource="QtSqlView.qrc">
+     <normaloff>:/img/upload.png</normaloff>:/img/upload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Upload Raw</string>
+   </property>
+   <property name="toolTip">
+    <string>Upload Raw</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="QtSqlView.qrc"/>
