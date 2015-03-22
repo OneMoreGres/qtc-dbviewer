@@ -11,7 +11,7 @@ Plugin allows to view databases, supported by QtSql module.
 3. Execute sql query.
 4. Copy table's or query's contents to clipboard.
 
-#Acknowledgements
+##Acknowledgements
 Plugin based on Timo Bingmann's <tb@idlebox.net> [QtSqlView application](http://idlebox.net/2006/qtsqlview/)
 
 ##Downloads
