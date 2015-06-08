@@ -2,7 +2,7 @@
 <ui version="4.0">
  <author>Timo Bingmann</author>
  <class>WMain</class>
- <widget class="QMainWindow" name="WMain">
+ <widget class="QWidget" name="WMain">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,7 +18,6 @@
    <iconset resource="QtSqlView.qrc">
     <normaloff>:/img/table.png</normaloff>:/img/table.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout">
     <property name="spacing">
      <number>6</number>
@@ -477,39 +476,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>690</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu_File">
-    <property name="title">
-     <string>&amp;File</string>
-    </property>
-    <addaction name="action_AddConnection"/>
-    <addaction name="action_EditConnection"/>
-    <addaction name="action_RemoveConnection"/>
-    <addaction name="action_RefreshTablelist"/>
-    <addaction name="separator"/>
-    <addaction name="action_Exit"/>
-   </widget>
-   <widget class="QMenu" name="menu_Help">
-    <property name="title">
-     <string>&amp;Help</string>
-    </property>
-    <addaction name="action_About"/>
-    <addaction name="action_VisitWebsite"/>
-    <addaction name="action_AboutQt"/>
-   </widget>
-   <addaction name="menu_File"/>
-   <addaction name="menu_Help"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="action_AddConnection">
    <property name="icon">
     <iconset resource="QtSqlView.qrc">
