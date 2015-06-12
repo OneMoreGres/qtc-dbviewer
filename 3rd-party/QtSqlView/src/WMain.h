@@ -8,9 +8,10 @@
 #ifndef _WMain_H_
 #define _WMain_H_
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QFileDialog>
 #include <QtGui/QClipboard>
+#include <QMenu>
 
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
@@ -47,16 +48,14 @@ class SqlFieldDelegate : public QStyledItemDelegate {
     }
 };
 
-class WMain : public QMainWindow, public Ui::WMain {
+class WMain : public QWidget, public Ui::WMain {
   Q_OBJECT
 
   public:
     WMain ()
-      : QMainWindow (),
+      : QWidget (),
       datatablemodel (NULL) {
       setupUi (this);
-      statusBar ()->hide ();
-      menuBar ()->hide ();
 
       dblist.loadFromSettings ();
 
