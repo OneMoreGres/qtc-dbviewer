@@ -112,7 +112,24 @@ class WMain : public QWidget, public Ui::WMain {
 
     QSqlQueryModel userquerymodel;
 
+    enum Tab {
+      TabTable, TabSchema, TabQuery
+    };
+
   public slots:
+
+    void on_tabWidget_currentChanged (int index) {
+      switch (index) {
+        case TabQuery:
+          editQuery->setFocus ();
+          break;
+        case TabTable:
+        case TabSchema:
+        default:
+          break;
+      }
+    }
+
     // *** Menu Actions ***
 
     void on_action_AddConnection_triggered () {
