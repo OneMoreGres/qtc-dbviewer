@@ -18,464 +18,481 @@
    <iconset resource="QtSqlView.qrc">
     <normaloff>:/img/table.png</normaloff>:/img/table.png</iconset>
   </property>
-   <layout class="QHBoxLayout">
-    <property name="spacing">
-     <number>6</number>
-    </property>
-    <property name="leftMargin">
-     <number>9</number>
-    </property>
-    <property name="topMargin">
-     <number>9</number>
-    </property>
-    <property name="rightMargin">
-     <number>9</number>
-    </property>
-    <property name="bottomMargin">
-     <number>9</number>
-    </property>
-    <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+  <layout class="QHBoxLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QTreeView" name="treeDbList">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>1</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <widget class="QTreeView" name="treeDbList">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+     </widget>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>4</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab1">
+       <attribute name="icon">
+        <iconset resource="QtSqlView.qrc">
+         <normaloff>:/img/table.png</normaloff>:/img/table.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Data</string>
+       </attribute>
+       <layout class="QVBoxLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
+        <item>
+         <widget class="QTableView" name="dataTable">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ContiguousSelection</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="addRowButton">
+            <property name="toolTip">
+             <string>Add Row</string>
+            </property>
+            <property name="text">
+             <string>Add Row</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/addrow.png</normaloff>:/img/addrow.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="delRowButton">
+            <property name="toolTip">
+             <string>Delete Selected Row(s)</string>
+            </property>
+            <property name="text">
+             <string>Delete Row</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/delrow.png</normaloff>:/img/delrow.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="copyDataButton">
+            <property name="toolTip">
+             <string>Copy Selected Cells</string>
+            </property>
+            <property name="text">
+             <string>Copy Selected Cells</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/copyedit.png</normaloff>:/img/copyedit.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QToolButton" name="refreshDataButton">
+            <property name="toolTip">
+             <string>Refresh</string>
+            </property>
+            <property name="text">
+             <string>Refresh</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/refresh.png</normaloff>:/img/refresh.png</iconset>
+            </property>
+            <property name="shortcut">
+             <string>F5</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="saveDataButton">
+            <property name="toolTip">
+             <string>Write Changes</string>
+            </property>
+            <property name="text">
+             <string>Save Changes</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="revertDataButton">
+            <property name="toolTip">
+             <string>Revert Changes</string>
+            </property>
+            <property name="text">
+             <string>Revert Changes</string>
+            </property>
+            <property name="icon">
+             <iconset resource="QtSqlView.qrc">
+              <normaloff>:/img/trash.png</normaloff>:/img/trash.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>4</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab1">
-        <attribute name="icon">
-         <iconset resource="QtSqlView.qrc">
-          <normaloff>:/img/table.png</normaloff>:/img/table.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Data</string>
-        </attribute>
-        <layout class="QVBoxLayout">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="leftMargin">
-          <number>9</number>
-         </property>
-         <property name="topMargin">
-          <number>9</number>
-         </property>
-         <property name="rightMargin">
-          <number>9</number>
-         </property>
-         <property name="bottomMargin">
-          <number>9</number>
-         </property>
-         <item>
-          <widget class="QTableView" name="dataTable">
-           <property name="alternatingRowColors">
-            <bool>true</bool>
+      <widget class="QWidget" name="tab2">
+       <attribute name="icon">
+        <iconset resource="QtSqlView.qrc">
+         <normaloff>:/img/scheme.png</normaloff>:/img/scheme.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Schema</string>
+       </attribute>
+       <layout class="QHBoxLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
+        <item>
+         <widget class="QTableView" name="schemaTable">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ContiguousSelection</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab3">
+       <attribute name="icon">
+        <iconset resource="QtSqlView.qrc">
+         <normaloff>:/img/query.png</normaloff>:/img/query.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Query</string>
+       </attribute>
+       <layout class="QVBoxLayout">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>9</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
+        <item>
+         <widget class="QSplitter" name="splitter_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <widget class="QWidget" name="widget2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>3</verstretch>
+            </sizepolicy>
            </property>
-           <property name="selectionMode">
-            <enum>QAbstractItemView::ContiguousSelection</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout">
-           <property name="spacing">
-            <number>6</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QToolButton" name="addRowButton">
-             <property name="toolTip">
-              <string>Add Row</string>
-             </property>
-             <property name="text">
-              <string>Add Row</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/addrow.png</normaloff>:/img/addrow.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="delRowButton">
-             <property name="toolTip">
-              <string>Delete Selected Row(s)</string>
-             </property>
-             <property name="text">
-              <string>Delete Row</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/delrow.png</normaloff>:/img/delrow.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="copyDataButton">
-             <property name="toolTip">
-              <string>Copy Selected Cells</string>
-             </property>
-             <property name="text">
-              <string>Copy Selected Cells</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/copyedit.png</normaloff>:/img/copyedit.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QToolButton" name="refreshDataButton">
-             <property name="toolTip">
-              <string>Refresh</string>
-             </property>
-             <property name="text">
-              <string>Refresh</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/refresh.png</normaloff>:/img/refresh.png</iconset>
-             </property>
-             <property name="shortcut">
-              <string>F5</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="saveDataButton">
-             <property name="toolTip">
-              <string>Write Changes</string>
-             </property>
-             <property name="text">
-              <string>Save Changes</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/edit.png</normaloff>:/img/edit.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="revertDataButton">
-             <property name="toolTip">
-              <string>Revert Changes</string>
-             </property>
-             <property name="text">
-              <string>Revert Changes</string>
-             </property>
-             <property name="icon">
-              <iconset resource="QtSqlView.qrc">
-               <normaloff>:/img/trash.png</normaloff>:/img/trash.png</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab2">
-        <attribute name="icon">
-         <iconset resource="QtSqlView.qrc">
-          <normaloff>:/img/scheme.png</normaloff>:/img/scheme.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Schema</string>
-        </attribute>
-        <layout class="QHBoxLayout">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="leftMargin">
-          <number>9</number>
-         </property>
-         <property name="topMargin">
-          <number>9</number>
-         </property>
-         <property name="rightMargin">
-          <number>9</number>
-         </property>
-         <property name="bottomMargin">
-          <number>9</number>
-         </property>
-         <item>
-          <widget class="QTableView" name="schemaTable">
-           <property name="selectionMode">
-            <enum>QAbstractItemView::ContiguousSelection</enum>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="tab3">
-        <attribute name="icon">
-         <iconset resource="QtSqlView.qrc">
-          <normaloff>:/img/query.png</normaloff>:/img/query.png</iconset>
-        </attribute>
-        <attribute name="title">
-         <string>Query</string>
-        </attribute>
-        <layout class="QVBoxLayout">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <property name="leftMargin">
-          <number>9</number>
-         </property>
-         <property name="topMargin">
-          <number>9</number>
-         </property>
-         <property name="rightMargin">
-          <number>9</number>
-         </property>
-         <property name="bottomMargin">
-          <number>9</number>
-         </property>
-         <item>
-          <widget class="QSplitter" name="splitter_2">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <widget class="QWidget" name="widget2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>3</verstretch>
-             </sizepolicy>
+           <layout class="QVBoxLayout">
+            <property name="spacing">
+             <number>6</number>
             </property>
-            <layout class="QVBoxLayout">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QTextEdit" name="editQuery">
-               <property name="acceptRichText">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout">
-               <property name="spacing">
-                <number>6</number>
-               </property>
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="goQueryButton">
-                 <property name="toolTip">
-                  <string>Execute Query</string>
-                 </property>
-                 <property name="text">
-                  <string>Execute Query</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="QtSqlView.qrc">
-                   <normaloff>:/img/go.png</normaloff>:/img/go.png</iconset>
-                 </property>
-                 <property name="shortcut">
-                  <string>Ctrl+R</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="copyQueryDataButton">
-                 <property name="toolTip">
-                  <string>Copy Selected Cells</string>
-                 </property>
-                 <property name="text">
-                  <string>Copy Selected Cells</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="QtSqlView.qrc">
-                   <normaloff>:/img/copyedit.png</normaloff>:/img/copyedit.png</iconset>
-                 </property>
-                 <property name="shortcut">
-                  <string>Ctrl+C</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QToolButton" name="clearQueryButton">
-                 <property name="toolTip">
-                  <string>Clear Query</string>
-                 </property>
-                 <property name="text">
-                  <string>Clear Query</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="QtSqlView.qrc">
-                   <normaloff>:/img/trash.png</normaloff>:/img/trash.png</iconset>
-                 </property>
-                 <property name="shortcut">
-                  <string>Ctrl+W</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="loadQueryButton">
-                 <property name="toolTip">
-                  <string>Load Query from Text File</string>
-                 </property>
-                 <property name="text">
-                  <string>Load Query</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="QtSqlView.qrc">
-                   <normaloff>:/img/fileload.png</normaloff>:/img/fileload.png</iconset>
-                 </property>
-                 <property name="shortcut">
-                  <string>Ctrl+O</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QToolButton" name="saveQueryButton">
-                 <property name="toolTip">
-                  <string>Save Query to Text File</string>
-                 </property>
-                 <property name="text">
-                  <string>Save Query to Text File</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="QtSqlView.qrc">
-                   <normaloff>:/img/filesave.png</normaloff>:/img/filesave.png</iconset>
-                 </property>
-                 <property name="shortcut">
-                  <string>Ctrl+S</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="widget">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>1</verstretch>
-             </sizepolicy>
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <layout class="QVBoxLayout">
-             <property name="spacing">
-              <number>6</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QTableView" name="queryTable">
-               <property name="alternatingRowColors">
-                <bool>true</bool>
-               </property>
-               <property name="selectionMode">
-                <enum>QAbstractItemView::ContiguousSelection</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTextEdit" name="queryResultText">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="acceptRichText">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QTextEdit" name="editQuery">
+              <property name="acceptRichText">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout">
+              <property name="spacing">
+               <number>6</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QToolButton" name="goQueryButton">
+                <property name="toolTip">
+                 <string>Execute Query</string>
+                </property>
+                <property name="text">
+                 <string>Execute Query</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/go.png</normaloff>:/img/go.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+R</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="copyQueryDataButton">
+                <property name="toolTip">
+                 <string>Copy Selected Cells</string>
+                </property>
+                <property name="text">
+                 <string>Copy Selected Cells</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/copyedit.png</normaloff>:/img/copyedit.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+C</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="saveQueryDataButton">
+                <property name="toolTip">
+                 <string>Save result to file</string>
+                </property>
+                <property name="text">
+                 <string>Save result to file</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/filesave.png</normaloff>:/img/filesave.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+E</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QToolButton" name="clearQueryButton">
+                <property name="toolTip">
+                 <string>Clear Query</string>
+                </property>
+                <property name="text">
+                 <string>Clear Query</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/trash.png</normaloff>:/img/trash.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+W</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="loadQueryButton">
+                <property name="toolTip">
+                 <string>Load Query from Text File</string>
+                </property>
+                <property name="text">
+                 <string>Load Query</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/fileload.png</normaloff>:/img/fileload.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+O</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="saveQueryButton">
+                <property name="toolTip">
+                 <string>Save Query to Text File</string>
+                </property>
+                <property name="text">
+                 <string>Save Query to Text File</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/filesave.png</normaloff>:/img/filesave.png</iconset>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+S</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
-         </item>
-        </layout>
-       </widget>
+          <widget class="QWidget" name="widget">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>1</verstretch>
+            </sizepolicy>
+           </property>
+           <layout class="QVBoxLayout">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QTableView" name="queryTable">
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ContiguousSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTextEdit" name="queryResultText">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="acceptRichText">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
-    </item>
-   </layout>
+    </widget>
+   </item>
+  </layout>
   <action name="action_AddConnection">
    <property name="icon">
     <iconset resource="QtSqlView.qrc">

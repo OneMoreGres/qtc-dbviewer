@@ -510,6 +510,46 @@ class WMain : public QWidget, public Ui::WMain {
       }
     }
 
+    void on_saveQueryDataButton_clicked () {
+      if (!userquerymodel.query ().isActive ()) {
+        return;
+      }
+
+      QString filename = QFileDialog::getSaveFileName (this, tr ("Choose output file"),
+                                                       QString (), tr ("HTML files (*.html)"));
+
+      if (filename.isEmpty ()) {
+        return;
+      }
+
+      if (!filename.endsWith (QStringLiteral(".html"))) {
+        filename.append (QStringLiteral(".html"));
+      }
+
+      QFile file (filename);
+      if (!file.open (QIODevice::WriteOnly)) {
+        QMessageBox::critical (this, tr ("QtSqlView"), tr ("Could not save result"));
+        return;
+      }
+
+      file.write ("<meta charset='utf-8'/><table>");
+
+      int cols = queryTable->horizontalHeader ()->count ();
+      QString tr = QLatin1String ("<tr>%1</tr>\n");
+      QString td = QLatin1String (" <td>%1</td>\n");
+      QString th = QLatin1String (" <th>%1</th>\n");
+      for (auto i = -1, end = userquerymodel.rowCount (); i < end; ++i) {
+        QString row;
+        for (int j = 0; j < cols; ++j) {
+          row += (i == -1) ? th.arg (userquerymodel.headerData (j, Qt::Horizontal).toString ())
+                           : td.arg (userquerymodel.index (i, j).data ().toString ());
+        }
+        file.write (tr.arg (row).toUtf8 ());
+      }
+
+      file.write ("</table>");
+    }
+
     void on_copyQueryDataButton_clicked () {
       QItemSelectionModel *selmodel = queryTable->selectionModel ();
       const QItemSelection &sellist = selmodel->selection ();
