@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/database.png</file>
+        <file>icons/database_mask.png</file>
+        <file>icons/database_mask@2x.png</file>
+        <file>icons/database@2x.png</file>
     </qresource>
 </RCC>

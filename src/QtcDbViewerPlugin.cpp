@@ -9,8 +9,16 @@
 
 #include <coreplugin/icore.h>
 #include <coreplugin/imode.h>
+#include <utils/icon.h>
 
 using namespace QtcDbViewer::Internal;
+
+const Utils::Icon MODE_DATABASE_CLASSIC(
+        QLatin1String(":/icons/database.png"));
+const Utils::Icon MODE_DATABASE_FLAT({
+        {QLatin1String(":/icons/database_mask.png"), Utils::Theme::IconsBaseColor}});
+const Utils::Icon MODE_DATABASE_FLAT_ACTIVE({
+        {QLatin1String(":/icons/database_mask.png"), Utils::Theme::IconsModeDesignActiveColor}});
 
 QtcDbViewerPlugin::QtcDbViewerPlugin () :
   IPlugin () {
@@ -39,7 +47,8 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
   dbViewMode->setId (Constants::QTCDBVIEWER_ID);
   dbViewMode->setContext (Core::Context (Constants::QTCDBVIEWER_CONTEXT));
   dbViewMode->setDisplayName (tr ("Db Viewer"));
-  dbViewMode->setIcon (QIcon (QStringLiteral (":/icons/database.png")));
+  dbViewMode->setIcon(Utils::Icon::modeIcon(MODE_DATABASE_CLASSIC,
+                                            MODE_DATABASE_FLAT, MODE_DATABASE_FLAT_ACTIVE));
   dbViewMode->setPriority (10);
   dbViewMode->setWidget (new WMain);
   addAutoReleasedObject (dbViewMode);
