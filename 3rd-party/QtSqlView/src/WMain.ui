@@ -415,7 +415,7 @@
                   <normaloff>:/img/fileload.png</normaloff>:/img/fileload.png</iconset>
                 </property>
                 <property name="shortcut">
-                 <string>Ctrl+O</string>
+                 <string>Ctrl+L</string>
                 </property>
                </widget>
               </item>
