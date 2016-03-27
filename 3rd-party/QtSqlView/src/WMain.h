@@ -607,11 +607,14 @@ class WMain : public QWidget, public Ui::WMain {
 
     void on_saveQueryButton_clicked () {
       QString filename = QFileDialog::getSaveFileName (this, tr ("Choose a SQL text file"),
-                                                       QString (),
-                                                       tr ("SQL text files (*.sql *.txt);;All Files (*.*)"));
+                                                       QString (), tr ("SQL files (*.sql)"));
 
       if (filename.isEmpty ()) {
         return;
+      }
+
+      if (!filename.endsWith (QStringLiteral(".sql"))) {
+        filename.append (QStringLiteral(".sql"));
       }
 
       QFile file (filename);
