@@ -87,6 +87,7 @@ class WMain : public QWidget, public Ui::WMain {
       QFont font (QStringLiteral ("Courier"), 10);
       font.setFixedPitch (true);
       editQuery->setFont (font);
+      editQuery->setContextMenuPolicy (Qt::CustomContextMenu);
 
       auto buttons = findChildren<QToolButton*>();
       QString tooltip (QStringLiteral("%1 (%2)"));
@@ -482,6 +483,60 @@ class WMain : public QWidget, public Ui::WMain {
     }
 
     // *** Query Tab ***
+
+    void setEditQueryText (const QString &text) {
+      auto cursor = editQuery->textCursor ();
+      cursor.select (QTextCursor::Document);
+      cursor.beginEditBlock ();
+      cursor.insertText (text);
+      cursor.endEditBlock ();
+    }
+
+    void unquoteQueryString () {
+      auto quote = QLatin1Char ('\"');
+      auto eol = QLatin1Char ('\n');
+      auto slash = QLatin1Char ('\\');
+      auto parts = editQuery->toPlainText ().split (quote);
+
+      auto isString = false;
+      QString result;
+      for (auto &part: parts) {
+        auto isEscaped = part.endsWith (slash);
+        if (isEscaped) {
+          part[part.length () - 1] = quote;
+        }
+
+        if (isString) {
+          result += part;
+        }
+        else if (part.contains (eol)) {
+          result += eol;
+        }
+
+        if (!isEscaped) {
+          isString = !isString;
+        }
+      }
+
+      setEditQueryText (result);
+    }
+
+    void quoteQueryString () {
+      auto quote = QLatin1Char ('\"');
+      auto eol = QLatin1Char ('\n');
+      auto slash = QLatin1Char ('\\');
+      QString result = editQuery->toPlainText ().replace (quote, slash + quote);
+      result = quote + result.replace (eol, quote + eol + quote) + quote;
+      setEditQueryText (result);
+    }
+
+    void on_editQuery_customContextMenuRequested (const QPoint &p) {
+      QMenu *menu = editQuery->createStandardContextMenu ();
+      menu->addAction (tr ("Unquote string"), this, SLOT (unquoteQueryString ()));
+      menu->addAction (tr ("Quote string"), this, SLOT (quoteQueryString ()));
+      menu->exec (editQuery->mapToGlobal (p));
+      delete menu;
+    }
 
     void on_goQueryButton_clicked () {
       DbConnection *dbc = dblist.getDbConnection (treeDbList->currentIndex () );
