@@ -660,6 +660,10 @@ class WMain : public QWidget, public Ui::WMain {
       editQuery->setPlainText (QString::fromLocal8Bit (file.readAll ()) );
     }
 
+    void on_clearQueryDataButton_clicked () {
+      userquerymodel.clear ();
+    }
+
     void on_saveQueryButton_clicked () {
       QString filename = QFileDialog::getSaveFileName (this, tr ("Choose a SQL text file"),
                                                        QString (), tr ("SQL files (*.sql)"));

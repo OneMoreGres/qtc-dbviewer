@@ -373,6 +373,20 @@
                </widget>
               </item>
               <item>
+               <widget class="QToolButton" name="clearQueryDataButton">
+                <property name="toolTip">
+                 <string>Clear result</string>
+                </property>
+                <property name="text">
+                 <string>Clear result</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="QtSqlView.qrc">
+                  <normaloff>:/img/trash.png</normaloff>:/img/trash.png</iconset>
+                </property>
+               </widget>
+              </item>
+              <item>
                <spacer>
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
