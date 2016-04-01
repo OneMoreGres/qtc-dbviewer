@@ -10,6 +10,7 @@
 #include <coreplugin/icore.h>
 #include <coreplugin/imode.h>
 #include <utils/icon.h>
+#include <coreplugin/actionmanager/actionmanager.h>
 
 using namespace QtcDbViewer::Internal;
 
@@ -43,14 +44,39 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
 
   initLanguage ();
 
+  auto context = Core::Context (Constants::QTCDBVIEWER_CONTEXT);
+
+  auto viewer = new WMain;
+  auto buttons = viewer->findChildren<QToolButton *>();
+  for (auto button: buttons) {
+    if (button->toolTip ().isEmpty ()) {
+      continue;
+    }
+    auto *proxyAction = new QAction (button->toolTip (), button);
+    connect (proxyAction, SIGNAL (triggered (bool)), button, SIGNAL (clicked (bool)));
+
+    auto id = Core::Id::fromString (QStringLiteral ("QtcDbViewer.") + button->objectName ());
+    auto *cmd = Core::ActionManager::registerAction (proxyAction, id, context);
+    cmd->setDefaultKeySequence (button->shortcut ().toString ());
+    button->setShortcut (QString ());
+    connect (cmd, &Core::Command::keySequenceChanged, [button, proxyAction, cmd]() {
+      QString tooltip = proxyAction->text ();
+      if (!cmd->keySequence ().isEmpty ()) {
+        tooltip += QString (QStringLiteral (" (%1)")).arg (cmd->keySequence ().toString ());
+      }
+      button->setToolTip (tooltip);
+    });
+    cmd->keySequenceChanged ();
+  }
+
   Core::IMode *dbViewMode = new Core::IMode;
   dbViewMode->setId (Constants::QTCDBVIEWER_ID);
-  dbViewMode->setContext (Core::Context (Constants::QTCDBVIEWER_CONTEXT));
+  dbViewMode->setContext (context);
   dbViewMode->setDisplayName (tr ("Db Viewer"));
-  dbViewMode->setIcon(Utils::Icon::modeIcon(MODE_DATABASE_CLASSIC,
-                                            MODE_DATABASE_FLAT, MODE_DATABASE_FLAT_ACTIVE));
+  dbViewMode->setIcon (Utils::Icon::modeIcon (MODE_DATABASE_CLASSIC,
+                                              MODE_DATABASE_FLAT, MODE_DATABASE_FLAT_ACTIVE));
   dbViewMode->setPriority (10);
-  dbViewMode->setWidget (new WMain);
+  dbViewMode->setWidget (viewer);
   addAutoReleasedObject (dbViewMode);
 
   return true;

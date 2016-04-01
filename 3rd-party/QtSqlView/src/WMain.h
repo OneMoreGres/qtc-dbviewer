@@ -89,14 +89,6 @@ class WMain : public QWidget, public Ui::WMain {
       editQuery->setFont (font);
       editQuery->setContextMenuPolicy (Qt::CustomContextMenu);
 
-      auto buttons = findChildren<QToolButton*>();
-      QString tooltip (QStringLiteral("%1 (%2)"));
-      for (auto button: buttons) {
-        if (!button->shortcut ().isEmpty ()) {
-          button->setToolTip (tooltip.arg (button->toolTip (), button->shortcut ().toString ()));
-        }
-      }
-
       new SQLHighlighter (editQuery->document ());
     }
 
