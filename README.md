@@ -16,6 +16,24 @@ Plugin based on Timo Bingmann's <tb@idlebox.net> [QtSqlView application](http://
 
 ##Downloads
 Binaries can be downloaded [here](https://sourceforge.net/projects/qtc-dbviewer/files/ "Sourceforge")
+or from github releases.
+
+
+##Installation
+IMPORTANT: plugin's version must match Qt Creator's version (difference in last digit is acceptable)
+
+###From source
+1. Change paths.pri:
+
+ - set `QTCREATOR_SOURCES` = path to Qt Creator source dir (with qtcreator.pro)
+ - set `IDE_BUILD_TREE` = path to compiled Qt Creator dir (with bin,lib,libexec,...)
+
+2. Compile plugin.
+
+###From binaries
+1. Extract/copy files from archive into Qt Creator's dir (archive already contains proper paths).
+2. Enable plugin in Help->Modules menu.
+
 
 ##More info
 Additional information can be obtained [here](http://gres.biz/qtc-dbviewer/ "Homepage") (in russian)
