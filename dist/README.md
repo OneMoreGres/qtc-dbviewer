@@ -1,5 +1,8 @@
 # Changelog
 
+## v 4.1.0
+QTC version update
+
 ## v 4.0.0
 * Toolbuttons' shortcuts translated to QTC's ones.
 * Added clear query result button.
