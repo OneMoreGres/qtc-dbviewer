@@ -14,12 +14,14 @@
 
 using namespace QtcDbViewer::Internal;
 
-const Utils::Icon MODE_DATABASE_CLASSIC(
-        QLatin1String(":/icons/database.png"));
-const Utils::Icon MODE_DATABASE_FLAT({
-        {QLatin1String(":/icons/database_mask.png"), Utils::Theme::IconsBaseColor}});
-const Utils::Icon MODE_DATABASE_FLAT_ACTIVE({
-        {QLatin1String(":/icons/database_mask.png"), Utils::Theme::IconsModeDesignActiveColor}});
+const Utils::Icon MODE_DATABASE_CLASSIC (
+  QLatin1String (":/icons/database.png"));
+const Utils::Icon MODE_DATABASE_FLAT ({
+  {QLatin1String (":/icons/database_mask.png"), Utils::Theme::IconsBaseColor}
+});
+const Utils::Icon MODE_DATABASE_FLAT_ACTIVE ({
+  {QLatin1String (":/icons/database_mask.png"), Utils::Theme::IconsModeDesignActiveColor}
+});
 
 QtcDbViewerPlugin::QtcDbViewerPlugin () :
   IPlugin () {
