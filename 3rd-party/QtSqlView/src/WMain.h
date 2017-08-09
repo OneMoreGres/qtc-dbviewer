@@ -514,9 +514,9 @@ class WMain : public QWidget, public Ui::WMain {
     }
 
     void quoteQueryString () {
-      auto quote = QLatin1Char ('\"');
-      auto eol = QLatin1Char ('\n');
-      auto slash = QLatin1Char ('\\');
+      auto quote =  ('\"');
+      auto eol =  ('\n');
+      auto slash =  ('\\');
       QString result = editQuery->toPlainText ().replace (quote, slash + quote);
       result = quote + result.replace (eol, quote + eol + quote) + quote;
       setEditQueryText (result);
