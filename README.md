@@ -3,7 +3,7 @@
 ## Introduction
 Plugin allows to view databases, supported by QtSql module.
 
-![Screen](dist/screen.png?raw=true)
+![Screen](util/screen.png?raw=true)
 
 ## Features
 1. Add several database connections with different drivers or connection options.
