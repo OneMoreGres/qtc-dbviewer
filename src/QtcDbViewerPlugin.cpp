@@ -71,7 +71,7 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
     cmd->keySequenceChanged ();
   }
 
-  Core::IMode *dbViewMode = new Core::IMode;
+  Core::IMode *dbViewMode = new Core::IMode(this);
   dbViewMode->setId (Constants::QTCDBVIEWER_ID);
   dbViewMode->setContext (context);
   dbViewMode->setDisplayName (tr ("Db Viewer"));
@@ -79,7 +79,6 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
                                               MODE_DATABASE_FLAT, MODE_DATABASE_FLAT_ACTIVE));
   dbViewMode->setPriority (10);
   dbViewMode->setWidget (viewer);
-  addAutoReleasedObject (dbViewMode);
 
   return true;
 }
