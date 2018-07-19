@@ -29,8 +29,8 @@ copy /Y qtcreator-latest\compiled\lib\qtcreator\plugins\%PLUGIN_NAME%4.dll dist\
 if %errorlevel% neq 0 exit /b %errorlevel%
 copy /Y %SELF_PATH%\..\..\translation\*.qm dist\share\qtcreator\translations
 
-if exist %PLUGIN_NAME%-%VERSION%-win.zip del /Q %PLUGIN_NAME%-%VERSION%-win.zip
+if exist %PLUGIN_NAME%-%VERSION%-win-%ARCH%.zip del /Q %PLUGIN_NAME%-%VERSION%-win-%ARCH%.zip
 cd dist
-7z a ..\%PLUGIN_NAME%-%VERSION%-win.zip *
+7z a ..\%PLUGIN_NAME%-%VERSION%-win-%ARCH%.zip *
 cd ..
 
