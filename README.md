@@ -15,8 +15,7 @@ Plugin allows to view databases, supported by QtSql module.
 Plugin based on Timo Bingmann's <tb@idlebox.net> [QtSqlView application](http://idlebox.net/2006/qtsqlview/)
 
 ## Downloads
-Binaries can be downloaded [here](https://sourceforge.net/projects/qtc-dbviewer/files/ "Sourceforge")
-or from github releases.
+Binaries can be downloaded from [github releases](https://github.com/OneMoreGres/qtc-dbviewer/releases).
 
 
 ## Installation
