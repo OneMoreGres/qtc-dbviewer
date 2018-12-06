@@ -38,7 +38,7 @@ QSqlError DbConnection::connect (DbList &dblist) {
     bool ok;
     QString passwd = QInputDialog::getText (NULL, tr ("QtSqlView Password Prompt"),
                                             tr ("Enter password for '%1':").arg (dbparam.label),
-                                            QLineEdit::Password, QString::null, &ok);
+                                           QLineEdit::Password, QString(), &ok);
 
     if (!ok) {
       QSqlError e = QSqlError (tr ("Could not connect to database"),

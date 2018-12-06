@@ -59,7 +59,7 @@ class WConnection : public QDialog, private Ui::WConnection {
     else if (drv == QStringLiteral ("QSQLITE2")) {
       return QStringLiteral ("SQLite 2.x");
     }
-    else{return QString::null; }
+    else{return QString(); }
   }
 
   public:
