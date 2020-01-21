@@ -9,3 +9,5 @@
 *.rar
 *.tar.gz
 *.tar.bz2
+.vscode
+__pycache__

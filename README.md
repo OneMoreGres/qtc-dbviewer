@@ -1,5 +1,7 @@
 # Qt Creator SQL database viewer plugin
 
+![build status](https://github.com/OneMoreGres/qtc-dbviewer/workflows/Plugin%20build/badge.svg)
+
 ## Introduction
 Plugin allows to view databases, supported by QtSql module.
 
