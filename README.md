@@ -33,7 +33,7 @@ IMPORTANT: plugin's version must match Qt Creator's version (difference in last 
 
 ### From binaries
 1. Extract/copy files from archive into Qt Creator's dir (archive already contains proper paths).
-2. Enable plugin in Help->Modules menu.
+2. Enable the `QtcDbViewer` plugin (Help → About Plugins...)
 
 
 ## More info
