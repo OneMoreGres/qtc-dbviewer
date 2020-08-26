@@ -5,11 +5,11 @@ import os
 c.print('>> Downloading Qt Creator {} for {}'.format(qtc_version, os_name))
 
 if os_name == 'linux':
-    os_url = 'linux_gcc_64_rhel72'
+    os_url = 'linux_x64'
 elif os_name == 'win32':
-    os_url = 'windows_msvc2017_x86'
+    os_url = 'windows_x86'
 elif os_name == 'win64':
-    os_url = 'windows_msvc2017_x64'
+    os_url = 'windows_x64'
 elif os_name == 'macos':
     os_url = 'mac_x64'
 

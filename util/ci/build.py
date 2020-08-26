@@ -30,9 +30,9 @@ elif os_name == 'macos':
 else:
     plugin_bin = 'lib/qtcreator/plugins/{}4.dll'.format(plugin_name)
     path_separator = ';'
-    make_cmd = os.path.abspath('qtcreator/bin/jom')
+    make_cmd = 'nmake'
 
-    msvc_version = os.getenv('msvc_version', '2017/Community')
+    msvc_version = os.getenv('msvc_version', '2019/Community')
     env_script = 'C:/Program Files (x86)/Microsoft Visual Studio/{}/VC/Auxiliary/Build/'.format(
         msvc_version)
     if os_name == 'win32':
