@@ -37,4 +37,4 @@ IMPORTANT: plugin's version must match Qt Creator's version (difference in last 
 
 
 ## More info
-Additional information can be obtained [here](http://gres.biz/qtc-dbviewer/ "Homepage") (in russian)
+Additional information can be obtained [here](https://qtcreator.gres.biz/page/dbviewer/ "Homepage") (in russian)
