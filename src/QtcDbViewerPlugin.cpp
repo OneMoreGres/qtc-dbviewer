@@ -57,7 +57,7 @@ bool QtcDbViewerPlugin::initialize (const QStringList &arguments, QString *error
     auto *proxyAction = new QAction (button->toolTip (), button);
     connect (proxyAction, SIGNAL (triggered (bool)), button, SIGNAL (clicked (bool)));
 
-    auto id = Core::Id::fromString (QStringLiteral ("QtcDbViewer.") + button->objectName ());
+    auto id = Utils::Id::fromString (QStringLiteral ("QtcDbViewer.") + button->objectName ());
     auto *cmd = Core::ActionManager::registerAction (proxyAction, id, context);
     cmd->setDefaultKeySequence (button->shortcut ().toString ());
     button->setShortcut (QString ());

@@ -1,4 +1,4 @@
-QT += sql
+QT += sql widgets
 INCLUDEPATH += $$PWD
 VPATH += $$PWD
 FORMS += WMain.ui WConnection.ui

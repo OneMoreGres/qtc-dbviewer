@@ -6,7 +6,7 @@ jobs:
   release:
     name: Create release
     if: contains(github.ref, '/tags/')
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - name: Create release
         if: contains(github.ref, '/tags/')
@@ -39,8 +39,8 @@ jobs:
       matrix:
         config:
           - { name: "win64", os: windows-latest }
-          - { name: "win32", os: windows-latest }
-          - { name: "linux", os: ubuntu-16.04 }
+#          - { name: "win32", os: windows-latest }
+          - { name: "linux", os: ubuntu-latest }
           - { name: "macos", os: macos-latest }
     steps:
       - uses: actions/checkout@v2
@@ -75,8 +75,8 @@ jobs:
       - name: Set env
         shell: bash
         run: |
-          echo ::set-env name=upload_url::`cat ./release_upload_url || true`
-          echo ::set-env name=artifact::`python ./util/ci/build.py artifact_name`
+          echo "upload_url=`cat ./release_upload_url || true`" >> $GITHUB_ENV
+          echo "artifact=`python ./util/ci/build.py artifact_name`" >> $GITHUB_ENV
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v1

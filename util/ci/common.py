@@ -43,6 +43,12 @@ def extract(src, dest):
     if len(dest) > 0:
         os.makedirs(dest, exist_ok=True)
 
+    if src.endswith('.tar') or src.endswith('.tar', 0, src.rfind('.')):
+        if which('tar'):
+            sub.run('tar xf "{}" --keep-newer-files -C "{}"'.format(abs_path, dest),
+                    check=True, shell=True)
+        return
+
     if which('7z'):
         sub.run('7z x "{}" -o"{}"'.format(abs_path, dest),
                 check=True, shell=True, input=b'S\n')
