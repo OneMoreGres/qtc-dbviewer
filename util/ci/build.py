@@ -28,7 +28,7 @@ elif os_name == 'macos':
         plugin_name)
     qm_files_dir = 'Qt Creator.app/Contents/Resources/translations'
 else:
-    plugin_bin = 'lib/qtcreator/plugins/{}4.dll'.format(plugin_name)
+    plugin_bin = 'lib/qtcreator/plugins/{}5.dll'.format(plugin_name)
     path_separator = ';'
     make_cmd = 'nmake'
 

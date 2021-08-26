@@ -39,9 +39,9 @@ for archive in ['qtcreator.7z', 'qtcreator_dev.7z']:
 if os_name.startswith('win'):
     c.print('>> Workaround (renaming .libs)')
     for name in glob.glob('{}/lib/qtcreator/**/*.lib'.format(qtc_dir), recursive=True):
-        if name.endswith('4.lib'):
+        if name.endswith('5.lib'):
             continue
-        newname = name[:-4]+'4.lib'
+        newname = name[:-4]+'5.lib'
         os.rename(name, newname)
         c.print('{} -> {}'.format(name, newname))
 

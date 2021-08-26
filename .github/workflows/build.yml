@@ -54,7 +54,7 @@ jobs:
 
       - name: Install system libs
         if: runner.os == 'Linux'
-        run: sudo apt install libgl1-mesa-dev
+        run: sudo apt update && sudo apt install libgl1-mesa-dev
 
       - name: Get Qt
         run: python ./util/ci/get_qt.py

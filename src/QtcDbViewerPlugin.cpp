@@ -87,7 +87,8 @@ void QtcDbViewerPlugin::initLanguage () {
   const QString &language = Core::ICore::userInterfaceLanguage ();
   if (!language.isEmpty ()) {
     QStringList paths;
-    paths << Core::ICore::resourcePath () << Core::ICore::userResourcePath ();
+    paths << Core::ICore::resourcePath ().toString ()
+          << Core::ICore::userResourcePath ().toString ();
     const QString &trFile = QLatin1String ("QtcDbViewer_") + language;
     QTranslator *translator = new QTranslator (this);
     foreach (const QString &path, paths) {
